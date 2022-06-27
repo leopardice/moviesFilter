@@ -9,9 +9,12 @@ import GenreCheckboxes from './components/GenreCheckboxes';
 import Pagination from './components/Pagination';
 
 interface FilterMenuProps {
-  onForwardClick: ()=> void;
+  onForwardClick: () => void;
+  index: number;
+  onBackwardClick: () => void;
 }
-const FiltersMenu = ({ onForwardClick }: FilterMenuProps) => (
+
+const FiltersMenu = ({ onForwardClick, onBackwardClick }: FilterMenuProps) => (
   <Grid item xs={3}>
     <Paper elevation={3} sx={{ padding: 1 }}>
       <Stack spacing={2}>
@@ -27,7 +30,7 @@ const FiltersMenu = ({ onForwardClick }: FilterMenuProps) => (
         <SortingMenu />
         <SelectYear />
         <GenreCheckboxes />
-        <Pagination onForwardClick={onForwardClick} />
+        <Pagination onForwardClick={onForwardClick} onBackwardClick={onBackwardClick} />
       </Stack>
     </Paper>
   </Grid>

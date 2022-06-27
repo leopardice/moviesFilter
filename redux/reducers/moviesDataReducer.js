@@ -4066,6 +4066,11 @@ const initialState = [
   },
 ];
 
-const moviesDataReducer = (action, state = initialState) => state;
-
-export default moviesDataReducer;
+export const moviesDataReducer = (action, state = initialState) => {
+  switch (action?.type) {
+    case UPDATE_MOVIES_DATA:
+      return action.cardsToShow;
+    default:
+      return state;
+  }
+};

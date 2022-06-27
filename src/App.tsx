@@ -1,14 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import {
   Container, createTheme, Grid, responsiveFontSizes, ThemeProvider,
 } from '@mui/material';
+import { useSelector } from 'react-redux';
 import MovieCard from './components/MovieCard/MovieCard';
 import FiltersMenu from './components/FiltersMenu/FiltersMenu';
 import Header from './components/Header';
 
 let theme = createTheme();
 theme = responsiveFontSizes(theme);
+
+interface movieCard {
+  adult: boolean;
+  backdrop_path: string;
+  genre_ids: number[];
+  id: number;
+  original_language: string;
+  original_title: string;
+  overview: string;
+  popularity: number;
+  poster_path: string;
+  release_date: string;
+  title: string;
+  video: boolean;
+  vote_average: number;
+  vote_count: number;
+}
 
 const MOVIES_DATA = [
   {
@@ -4077,12 +4095,29 @@ const MOVIES_DATA = [
 ];
 
 const App = () => {
-  const [index, setIndex] = useState(0);
-  const [moviesToShow, setMoviesToShow] = useState(MOVIES_DATA.slice(index, index + 10));
+  const [movieIndex, setMovieIndex] = useState(0);
+  const [moviesToShow, setMoviesToShow] = useState(MOVIES_DATA.slice(movieIndex, movieIndex + 10));
 
-  const forwardButtonHandler = (prevState: number) => {
-    setIndex(prevState + 10);
+  const cardsToShow = useSelector((state) => {
+    const { cardsToShowReducer } = state;
+    return cardsToShowReducer;
+  });
+
+  useEffect(() => {
+    setMoviesToShow(cardsToShow);
+  }, [cardsToShow]);
+
+  const forwardButtonHandler = () => {
+    setMovieIndex((prevState) => prevState + 10);
   };
+
+  const backwardsButtonHandler = () => {
+    setMovieIndex((prevState) => prevState - 10);
+  };
+
+  useEffect(() => {
+    setMoviesToShow(MOVIES_DATA.slice(movieIndex, movieIndex + 10));
+  }, [movieIndex]);
 
   return (
     <ThemeProvider theme={theme}>
@@ -4090,7 +4125,11 @@ const App = () => {
         <Header />
         <Container>
           <Grid container spacing={1}>
-            <FiltersMenu onForwardClick={forwardButtonHandler} />
+            <FiltersMenu
+              onForwardClick={forwardButtonHandler}
+              onBackwardClick={backwardsButtonHandler}
+              index={movieIndex}
+            />
             <Grid item container xs={9} spacing={1}>
               {moviesToShow.map((movieInfo) => (
                 <MovieCard
