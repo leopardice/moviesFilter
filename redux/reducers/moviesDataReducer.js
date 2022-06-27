@@ -1,16 +1,6 @@
-import React, { useState } from 'react';
-import './App.css';
-import {
-  Container, createTheme, Grid, responsiveFontSizes, ThemeProvider,
-} from '@mui/material';
-import MovieCard from './components/MovieCard/MovieCard';
-import FiltersMenu from './components/FiltersMenu/FiltersMenu';
-import Header from './components/Header';
+import { UPDATE_MOVIES_DATA } from '../types';
 
-let theme = createTheme();
-theme = responsiveFontSizes(theme);
-
-const MOVIES_DATA = [
+const initialState = [
   {
     adult: false,
     backdrop_path: '/qjGrUmKW78MCFG8PTLDBp67S27p.jpg',
@@ -4076,36 +4066,6 @@ const MOVIES_DATA = [
   },
 ];
 
-const App = () => {
-  const [index, setIndex] = useState(0);
-  const [moviesToShow, setMoviesToShow] = useState(MOVIES_DATA.slice(index, index + 10));
+const moviesDataReducer = (action, state = initialState) => state;
 
-  const forwardButtonHandler = (prevState: number) => {
-    setIndex(prevState + 10);
-  };
-
-  return (
-    <ThemeProvider theme={theme}>
-      <div className="App">
-        <Header />
-        <Container>
-          <Grid container spacing={1}>
-            <FiltersMenu onForwardClick={forwardButtonHandler} />
-            <Grid item container xs={9} spacing={1}>
-              {moviesToShow.map((movieInfo) => (
-                <MovieCard
-                  key={movieInfo.id}
-                  rating={movieInfo.vote_average}
-                  title={movieInfo.title}
-                  detailsText={movieInfo.overview}
-                  imagePath={`https://image.tmdb.org/t/p/w500/${movieInfo.poster_path || movieInfo.backdrop_path}`}
-                />
-              ))}
-            </Grid>
-          </Grid>
-        </Container>
-      </div>
-    </ThemeProvider>
-  );
-};
-export default App;
+export default moviesDataReducer;
