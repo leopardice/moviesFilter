@@ -4103,6 +4103,9 @@ const App = () => {
     return cardsToShowReducer;
   });
 
+  console.log(cardsToShow);
+  console.log(moviesToShow);
+
   useEffect(() => {
     setMoviesToShow(cardsToShow);
   }, [cardsToShow]);
