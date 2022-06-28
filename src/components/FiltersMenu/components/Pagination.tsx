@@ -1,6 +1,6 @@
 import React from 'react';
 import { Grid, Button, Typography } from '@mui/material';
-import { getCurrentPage, getNumberOfPages } from '../../../utils';
+import { getCurrentPage, getNumberOfPages, showRequiredMovies } from '../../../utils';
 
 interface PaginationProps {
   onForwardClick: () => void;
@@ -12,7 +12,7 @@ const Pagination = ({
   onForwardClick, onBackwardClick, index,
 }: PaginationProps) => {
   const currentPage = getCurrentPage(index);
-  const numberOfPages = getNumberOfPages();
+  const { numberOfPages } = showRequiredMovies();
   const backwardsButtonDisabled = (+currentPage === 1);
   const forwardButtonDisabled = (+currentPage === +numberOfPages);
 

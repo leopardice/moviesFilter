@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   FormControl, Select, Typography, MenuItem,
 } from '@mui/material';
 import { SelectChangeEvent } from '@mui/material/Select';
+import { useDispatch } from 'react-redux';
+import { updateSortingValue } from '../../../../redux/actions';
 
 const SORTING_VALUES = {
   highToLow: 'Популярные по убыванию',
@@ -10,11 +12,17 @@ const SORTING_VALUES = {
 };
 
 const SortingMenu = () => {
-  const [sortValue, setSortValue] = React.useState('Популярные по убыванию');
+  const [sortValue, setSortValue] = React.useState(SORTING_VALUES.highToLow);
+
+  const dispatch = useDispatch();
 
   const handleChange = (event: SelectChangeEvent) => {
     setSortValue(event.target.value as string);
   };
+
+  useEffect(() => {
+    dispatch(updateSortingValue(sortValue));
+  }, [sortValue]);
 
   return (
     <div>

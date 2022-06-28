@@ -3,20 +3,20 @@ import './App.css';
 import {
   Container, createTheme, Grid, responsiveFontSizes, ThemeProvider,
 } from '@mui/material';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import MovieCard from './components/MovieCard/MovieCard';
 import FiltersMenu from './components/FiltersMenu/FiltersMenu';
 import Header from './components/Header';
-import { movieCard } from './interfaces';
-import getMoviesToShow from './utils';
-import MOVIES_DATA from '/src/moviesData.ts';
+import getMoviesToShow, { showRequiredMovies } from './utils';
+import { IStore } from './interfaces';
 
 let theme = createTheme();
 theme = responsiveFontSizes(theme);
 
 const App = () => {
+  const [moviesArray, setMoviesArray] = useState(showRequiredMovies().sortedByValue);
   const [movieIndex, setMovieIndex] = useState(0);
-  const [cardsToShow, setCardsToShow] = useState(getMoviesToShow(MOVIES_DATA, 0));
+  const [cardsToShow, setCardsToShow] = useState(getMoviesToShow(moviesArray, 0));
 
   const forwardButtonHandler = () => {
     setMovieIndex((prevState) => prevState + 10);
@@ -26,8 +26,18 @@ const App = () => {
     setMovieIndex((prevState) => prevState - 10);
   };
 
+  const sortingValues = useSelector((state: IStore) => {
+    const { sortingValuesReducer } = state;
+    return sortingValuesReducer;
+  });
+
   useEffect(() => {
-    setCardsToShow(getMoviesToShow(MOVIES_DATA, movieIndex));
+    setMoviesArray(showRequiredMovies(sortingValues.year, sortingValues.sortingValue).sortedByValue);
+    console.log(sortingValues);
+  }, [sortingValues]);
+
+  useEffect(() => {
+    setCardsToShow(getMoviesToShow(moviesArray, movieIndex));
   }, [movieIndex]);
 
   return (

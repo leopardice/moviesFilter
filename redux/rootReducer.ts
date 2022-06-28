@@ -1,10 +1,9 @@
 import { combineReducers } from 'redux';
 import { moviesDataReducer } from './reducers/moviesDataReducer';
-import { cardsToShowReducer } from './reducers/cardsToShowReducer';
+import { sortingValuesReducer } from './reducers/sortingValuesReducer';
 
 const rootReducer = combineReducers({
-  moviesDataReducer,
-  cardsToShowReducer,
+  sortingValuesReducer,
 });
 
 export default rootReducer;
