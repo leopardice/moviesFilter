@@ -14,7 +14,9 @@ interface FilterMenuProps {
   onBackwardClick: () => void;
 }
 
-const FiltersMenu = ({ onForwardClick, onBackwardClick }: FilterMenuProps) => (
+const FiltersMenu = ({
+  onForwardClick, onBackwardClick, index,
+}: FilterMenuProps) => (
   <Grid item xs={3}>
     <Paper elevation={3} sx={{ padding: 1 }}>
       <Stack spacing={2}>
@@ -30,7 +32,11 @@ const FiltersMenu = ({ onForwardClick, onBackwardClick }: FilterMenuProps) => (
         <SortingMenu />
         <SelectYear />
         <GenreCheckboxes />
-        <Pagination onForwardClick={onForwardClick} onBackwardClick={onBackwardClick} />
+        <Pagination
+          onForwardClick={onForwardClick}
+          onBackwardClick={onBackwardClick}
+          index={index}
+        />
       </Stack>
     </Paper>
   </Grid>

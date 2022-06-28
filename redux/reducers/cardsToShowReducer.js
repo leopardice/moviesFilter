@@ -35,7 +35,7 @@ const initialState = [{
   vote_count: 899,
 }];
 
-export const cardsToShowReducer = (action, state = initialState) => {
+export const cardsToShowReducer = (state = initialState, action) => {
   switch (action?.type) {
     case UPDATE_CARDS_TO_SHOW:
       return action.cardsToShow;

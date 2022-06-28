@@ -1,6 +1,4 @@
-import { UPDATE_MOVIES_DATA } from '../types';
-
-const initialState = [
+const MOVIES_DATA = [
   {
     adult: false,
     backdrop_path: '/qjGrUmKW78MCFG8PTLDBp67S27p.jpg',
@@ -4066,11 +4064,4 @@ const initialState = [
   },
 ];
 
-export const moviesDataReducer = (state = initialState, action) => {
-  switch (action?.type) {
-    case UPDATE_MOVIES_DATA:
-      return action.cardsToShow;
-    default:
-      return state;
-  }
-};
+export default MOVIES_DATA;
