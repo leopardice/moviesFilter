@@ -28,9 +28,9 @@ const sortMoviesArray = (array: IMovieCard[], sortingValue: string): IMovieCard[
 
 export const showRequiredMovies = (year: number = 2020, sortingValue: string = SORTING_VALUES.highToLow) : IShowRequiredMovies => {
   const sortedByYear = MOVIES_DATA.filter((item) => new Date(item.release_date).getFullYear() === year);
-  const sortedByValue = sortMoviesArray(sortedByYear, sortingValue);
-  const numberOfPages = getNumberOfPages(sortedByValue);
-  return { sortedByValue, numberOfPages };
+  const sortedArray = sortMoviesArray(sortedByYear, sortingValue);
+  const numberOfPages = getNumberOfPages(sortedArray);
+  return { sortedArray, numberOfPages };
 };
 
 export default getMoviesToShow;

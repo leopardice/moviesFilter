@@ -18,7 +18,7 @@ export interface IMovieCard {
 }
 
 export interface IShowRequiredMovies {
-  sortedByValue: IMovieCard[],
+  sortedArray: IMovieCard[],
   numberOfPages: string
 }
 

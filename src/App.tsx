@@ -9,12 +9,13 @@ import FiltersMenu from './components/FiltersMenu/FiltersMenu';
 import Header from './components/Header';
 import getMoviesToShow, { showRequiredMovies } from './utils';
 import { IStore } from './interfaces';
+import MOVIES_DATA from './moviesData';
 
 let theme = createTheme();
 theme = responsiveFontSizes(theme);
 
 const App = () => {
-  const [moviesArray, setMoviesArray] = useState(showRequiredMovies().sortedByValue);
+  const [moviesArray, setMoviesArray] = useState(showRequiredMovies().sortedArray);
   const [movieIndex, setMovieIndex] = useState(0);
   const [cardsToShow, setCardsToShow] = useState(getMoviesToShow(moviesArray, 0));
 
@@ -32,8 +33,7 @@ const App = () => {
   });
 
   useEffect(() => {
-    setMoviesArray(showRequiredMovies(sortingValues.year, sortingValues.sortingValue).sortedByValue);
-    console.log(sortingValues);
+    setMoviesArray(showRequiredMovies(sortingValues.year, sortingValues.sortingValue).sortedArray);
   }, [sortingValues]);
 
   useEffect(() => {
