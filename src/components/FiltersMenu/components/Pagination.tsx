@@ -1,28 +1,44 @@
 import React from 'react';
 import { Grid, Button, Typography } from '@mui/material';
-import { getCurrentPage, getNumberOfPages, showRequiredMovies } from '../../../utils';
+import { useDispatch, useSelector } from 'react-redux';
+import { IMovieCard, IStore } from '../../../interfaces/interfaces';
+import { setMovieIndex } from '../../../../redux/actions';
+import { getFilteredList } from '../../MoviesList/filterList';
 
-interface PaginationProps {
-  onForwardClick: () => void;
-  index: number;
-  onBackwardClick: () => void;
-}
+const Pagination = () => {
+  const getCurrentPage = (index: number) : number => {
+    const currentPage = Math.round((index + 10) / 10);
+    return currentPage;
+  };
 
-const Pagination = ({
-  onForwardClick, onBackwardClick, index,
-}: PaginationProps) => {
-  const currentPage = getCurrentPage(index);
-  const { numberOfPages } = showRequiredMovies();
-  const backwardsButtonDisabled = (+currentPage === 1);
-  const forwardButtonDisabled = (+currentPage === +numberOfPages);
+  const getNumberOfPages = (array: IMovieCard[]) : number => {
+    const numberOfPages = Math.ceil((array.length) / 10);
+    return numberOfPages;
+  };
+
+  const movieIndex = useSelector((state: IStore) => state.movieIndex);
+  const currentPage = getCurrentPage(movieIndex);
+  const numberOfPages = getNumberOfPages(getFilteredList());
+  const backwardsButtonDisabled = (currentPage === 1);
+  const forwardButtonDisabled = (currentPage === numberOfPages);
+
+  const dispatch = useDispatch();
+
+  const forwardButtonHandler = () => {
+    dispatch(setMovieIndex(movieIndex + 10));
+  };
+
+  const backwardsButtonHandler = () => {
+    dispatch(setMovieIndex(movieIndex - 10));
+  };
 
   return (
     <Grid container spacing={0}>
       <Grid item xs={6}>
-        <Button variant="contained" disabled={backwardsButtonDisabled} onClick={onBackwardClick}>Назад</Button>
+        <Button variant="contained" disabled={backwardsButtonDisabled} onClick={backwardsButtonHandler}>Назад</Button>
       </Grid>
       <Grid item xs={6}>
-        <Button variant="contained" disabled={forwardButtonDisabled} onClick={onForwardClick}>Вперед</Button>
+        <Button variant="contained" disabled={forwardButtonDisabled} onClick={forwardButtonHandler}>Вперед</Button>
       </Grid>
       <Grid item xs={12}>
         <Typography variant="body1" component="p">

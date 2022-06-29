@@ -7,36 +7,18 @@ import SortingMenu from './components/SortingMenu';
 import SelectYear from './components/SelectYear';
 import GenreCheckboxes from './components/GenreCheckboxes';
 import Pagination from './components/Pagination';
+import ResetFiltersButton from './components/ResetFiltersButton';
 
-interface FilterMenuProps {
-  onForwardClick: () => void;
-  index: number;
-  onBackwardClick: () => void;
-}
-
-const FiltersMenu = ({
-  onForwardClick, onBackwardClick, index,
-}: FilterMenuProps) => (
+const FiltersMenu = () => (
   <Grid item xs={3}>
     <Paper elevation={3} sx={{ padding: 1 }}>
       <Stack spacing={2}>
         <Typography variant="h4" component="h4">Фильтры:</Typography>
-        <Button
-          className="reset-filters"
-          variant="contained"
-          size="small"
-          sx={{ backgroundColor: 'black' }}
-        >
-          Сбросить все фильтры
-        </Button>
+        <ResetFiltersButton />
         <SortingMenu />
         <SelectYear />
         <GenreCheckboxes />
-        <Pagination
-          onForwardClick={onForwardClick}
-          onBackwardClick={onBackwardClick}
-          index={index}
-        />
+        <Pagination />
       </Stack>
     </Paper>
   </Grid>

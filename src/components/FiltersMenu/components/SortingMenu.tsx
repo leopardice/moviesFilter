@@ -1,28 +1,21 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
   FormControl, Select, Typography, MenuItem,
 } from '@mui/material';
 import { SelectChangeEvent } from '@mui/material/Select';
-import { useDispatch } from 'react-redux';
-import { updateSortingValue } from '../../../../redux/actions';
-
-const SORTING_VALUES = {
-  highToLow: 'Популярные по убыванию',
-  lowToHigh: 'Популярные по возрастанию',
-};
+import { useDispatch, useSelector } from 'react-redux';
+import { SORTING_VALUES } from '../../MoviesList/filterList';
+import { setMovieIndex, setSortingValue } from '../../../../redux/actions';
+import { IStore } from '../../../interfaces/interfaces';
 
 const SortingMenu = () => {
-  const [sortValue, setSortValue] = React.useState(SORTING_VALUES.highToLow);
-
   const dispatch = useDispatch();
+  const sortingValue = useSelector((state: IStore) => state.sortingValue);
 
   const handleChange = (event: SelectChangeEvent) => {
-    setSortValue(event.target.value as string);
+    dispatch(setSortingValue(event.target.value));
+    dispatch(setMovieIndex(0));
   };
-
-  useEffect(() => {
-    dispatch(updateSortingValue(sortValue));
-  }, [sortValue]);
 
   return (
     <div>
@@ -30,11 +23,9 @@ const SortingMenu = () => {
       <FormControl fullWidth>
         <Select
           onChange={handleChange}
-          value={sortValue}
+          value={sortingValue}
         >
-          <MenuItem value={SORTING_VALUES.highToLow}>
-            {SORTING_VALUES.highToLow}
-          </MenuItem>
+          <MenuItem value={SORTING_VALUES.highToLow}>{SORTING_VALUES.highToLow}</MenuItem>
           <MenuItem value={SORTING_VALUES.lowToHigh}>
             {SORTING_VALUES.lowToHigh}
           </MenuItem>

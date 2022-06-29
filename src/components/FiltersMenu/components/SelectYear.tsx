@@ -1,16 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   FormControl, MenuItem, Select, Typography,
 } from '@mui/material';
 import { SelectChangeEvent } from '@mui/material/Select';
+import { useDispatch, useSelector } from 'react-redux';
+import { setMovieIndex, setReleaseYear } from '../../../../redux/actions';
+import { IStore } from '../../../interfaces/interfaces';
 
-const YEARS = [2018, 2019, 2020, 2021, 2022];
+const YEARS = [2017, 2018, 2019, 2020];
 
 const SelectYear = () => {
-  const [selectedYear, setSelectedYear] = useState('');
+  const dispatch = useDispatch();
+  const selectedYear = useSelector((state: IStore) => state.releaseYear);
 
   const handleChange = (event: SelectChangeEvent) => {
-    setSelectedYear(event.target.value as string);
+    dispatch(setMovieIndex(0));
+    dispatch(setReleaseYear(+event.target.value as number));
   };
 
   return (
@@ -19,7 +24,7 @@ const SelectYear = () => {
       <FormControl fullWidth>
         <Select
           onChange={handleChange}
-          value={selectedYear}
+          value={selectedYear.toString()}
         >
           {YEARS.map((year) => <MenuItem key={year} value={year}>{year}</MenuItem>)}
         </Select>
