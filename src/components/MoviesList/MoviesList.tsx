@@ -1,9 +1,11 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Grid } from '@mui/material';
-import { IMovieCard, IStore } from '../../interfaces/interfaces';
+import { IMovieCard, IStore } from '../../interfaces';
 import MovieCard from './MovieCard/MovieCard';
-import { getFilteredList } from './filterList';
+import {
+  favoriteFilmsKey, getCardsList, getFilteredList, watchLaterKey,
+} from './filterList';
 
 const MoviesList = () => {
   const movieIndex = useSelector((state: IStore) => state.movieIndex);
@@ -13,13 +15,14 @@ const MoviesList = () => {
     return moviesData.slice(startIndex, endPosition);
   };
 
-  const cardsToShow = showCurrentPageMovies(getFilteredList(), movieIndex);
+  const cardsToShow = showCurrentPageMovies(getCardsList(watchLaterKey), movieIndex);
 
   return (
     <Grid item container xs={9} spacing={1}>
       {cardsToShow.map((movieInfo) => (
         <MovieCard
           key={movieInfo.id}
+          id={movieInfo.id}
           rating={movieInfo.vote_average}
           title={movieInfo.title}
           detailsText={movieInfo.overview}

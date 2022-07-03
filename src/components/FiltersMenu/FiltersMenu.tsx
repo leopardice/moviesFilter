@@ -1,27 +1,35 @@
 import React from 'react';
 import {
-  Grid, Paper, Stack, Typography, FormControl, InputLabel, Select,
+  Grid, Paper, Stack, Typography,
 } from '@mui/material';
-import Button from '@mui/material/Button';
+import { useSelector } from 'react-redux';
 import SortingMenu from './components/SortingMenu';
 import SelectYear from './components/SelectYear';
 import GenreCheckboxes from './components/GenreCheckboxes';
 import Pagination from './components/Pagination';
 import ResetFiltersButton from './components/ResetFiltersButton';
+import { IStore } from '../../interfaces';
+import BookmarkSelect from './components/bookmark-select';
 
-const FiltersMenu = () => (
-  <Grid item xs={3}>
-    <Paper elevation={3} sx={{ padding: 1 }}>
-      <Stack spacing={2}>
-        <Typography variant="h4" component="h4">Фильтры:</Typography>
-        <ResetFiltersButton />
-        <SortingMenu />
-        <SelectYear />
-        <GenreCheckboxes />
-        <Pagination />
-      </Stack>
-    </Paper>
-  </Grid>
-);
+const FiltersMenu = () => {
+  const isLoggedIn = useSelector((state: IStore) => state.isLoggedIn);
 
+  return (
+    <Grid item xs={3}>
+      <Paper elevation={3} sx={{ padding: 1 }}>
+        <Stack spacing={2}>
+          {isLoggedIn
+            ? <BookmarkSelect />
+            : ''}
+          <Typography variant="h4" component="h4">Фильтры:</Typography>
+          <ResetFiltersButton />
+          <SortingMenu />
+          <SelectYear />
+          <GenreCheckboxes />
+          <Pagination />
+        </Stack>
+      </Paper>
+    </Grid>
+  );
+};
 export default FiltersMenu;

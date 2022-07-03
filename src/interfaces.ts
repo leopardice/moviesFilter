@@ -19,4 +19,8 @@ export interface IStore {
   movieIndex: number
   releaseYear: number
   sortingValue: string
+  chosenGenres: number[]
+  isLoggedIn: boolean
+  isLoginModalOpen: boolean
+  favoriteFilms: number[]
 }

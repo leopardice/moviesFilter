@@ -2,23 +2,49 @@ import React, { useState } from 'react';
 import {
   Grid, Paper, Button, Typography, Box,
 } from '@mui/material';
-import { StarBorder, BookmarkBorderOutlined } from '@mui/icons-material';
-import DetailsModal from './DetailsModal';
+import { useDispatch, useSelector } from 'react-redux';
+import DetailsModal from './components/DetailsModal';
+import AddFavoriteButton from './components/add-favorite-button';
+import AddWatchLaterButton from './components/add-watch-later-button';
+import useLoginModalStatus, { useAuthenticationStatus } from '../../../hooks';
+import { IStore } from '../../../interfaces';
+import { addFilmFavorite, removeFilmFavorite } from '../../../../redux/actions';
+import { isIdInList } from '../../../utils';
 
 interface MovieCardProps {
   rating: number;
   title: string;
   detailsText: string;
   imagePath: string;
+  id: number;
+}
+
+export interface IFavoriteButton {
+  onClick: (key: string)=> void;
 }
 
 const MovieCard = ({
-  rating, title, detailsText, imagePath,
+  rating, title, detailsText, imagePath, id,
 }: MovieCardProps) => {
   const [detailsTabActive, setDetailsTabActive] = useState(false);
 
   const detailsClickHandler = () => {
     setDetailsTabActive(!detailsTabActive);
+  };
+
+  const [isModalOpen, setLoginModalStatus] = useLoginModalStatus();
+  const [isAuthenticated, setAuthenticationStatus] = useAuthenticationStatus();
+
+  const favoriteFilms = useSelector((state: IStore) => state.favoriteFilms);
+  const dispatch = useDispatch();
+
+  const handleListButtonClick = (key: string) => {
+    if (!isAuthenticated) {
+      setLoginModalStatus(true);
+      return;
+    }
+    if (isIdInList(id, favoriteFilms)) dispatch(removeFilmFavorite(id));
+    else dispatch(addFilmFavorite(id));
   };
 
   return (
@@ -56,8 +82,12 @@ const MovieCard = ({
                     Рейтинг фильма:
                     {rating}
                   </Typography>
-                  <StarBorder sx={{ width: 12 }} />
-                  <BookmarkBorderOutlined sx={{ width: 12 }} />
+                  <AddFavoriteButton
+                    onClick={handleListButtonClick}
+                  />
+                  <AddWatchLaterButton
+                    onClick={handleListButtonClick}
+                  />
                 </Box>
                 <Grid item>
                   <Typography variant="h6" component="h6">{title}</Typography>
