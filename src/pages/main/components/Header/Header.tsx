@@ -3,7 +3,8 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
-import useLoginModalStatus, { useAuthenticationStatus } from '../../hooks';
+import { Link } from 'react-router-dom';
+import useLoginModalStatus, { useAuthenticationStatus } from '../../../../hooks';
 
 const Header = () => {
   const [isModalOpen, setLoginModalStatus] = useLoginModalStatus();
@@ -30,7 +31,8 @@ const Header = () => {
           justifyContent: 'space-between',
         }}
         >
-          <Button color="inherit">Menu</Button>
+          <Link className="pages-link" to="/"><Button sx={{ color: 'white' }}>Menu</Button></Link>
+          <Link className="pages-link" to="/search"><Button sx={{ color: 'white' }}>Search</Button></Link>
           {isAuthenticated
             ? <Button onClick={logOutHandler} color="inherit">LogOut</Button>
             : <Button onClick={handleClickOpen} color="inherit">Login</Button>}

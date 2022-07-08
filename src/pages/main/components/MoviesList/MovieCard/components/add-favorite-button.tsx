@@ -1,12 +1,12 @@
 import React from 'react';
 import { StarBorder } from '@mui/icons-material';
+import StarIcon from '@mui/icons-material/Star';
 import { Button } from '@mui/material';
 import { IFavoriteButton } from '../MovieCard';
+import { LOCAL_STORAGE_KEYS } from '../../../../../../utils';
 
-const favoriteFilmsKey = 'favoriteFilms';
-
-const AddFavoriteButton = ({ onClick }: IFavoriteButton) => {
-  const handleClick = () => { onClick(favoriteFilmsKey); };
+const AddFavoriteButton = ({ onClick, isFilmInList }: IFavoriteButton) => {
+  const handleClick = () => { onClick(LOCAL_STORAGE_KEYS.favoriteFilmsKey); };
   return (
     <Button
       onClick={handleClick}
@@ -17,7 +17,9 @@ const AddFavoriteButton = ({ onClick }: IFavoriteButton) => {
       }}
       aria-label="add to favorites"
     >
-      <StarBorder sx={{ width: 12 }} />
+      {isFilmInList
+        ? <StarIcon sx={{ width: 12 }} />
+        : <StarBorder sx={{ width: 12 }} />}
     </Button>
   );
 };

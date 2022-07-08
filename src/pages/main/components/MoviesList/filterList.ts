@@ -1,14 +1,13 @@
 import { useSelector } from 'react-redux';
-import { IMovieCard, IStore } from '../../interfaces';
+import { IMovieCard, IStore } from '../../../../interfaces';
 import MOVIES_DATA from './moviesData';
+import { LOCAL_STORAGE_KEYS } from '../../../../utils';
+import { bookmarkTypes } from '../FiltersMenu/components/bookmark-select';
 
 export const SORTING_VALUES = {
   highToLow: 'Популярные по убыванию',
   lowToHigh: 'Популярные по возрастанию',
 };
-
-export const favoriteFilmsKey = 'favoriteFilms';
-export const watchLaterKey = 'watchLater';
 
 const getFilmById = (savedId: number) => {
   const filmCard = MOVIES_DATA.find((item) => item.id === savedId);
@@ -16,23 +15,20 @@ const getFilmById = (savedId: number) => {
   return filmCard as IMovieCard;
 };
 
-const getCardsByIds = (key: string): IMovieCard[] => {
-  const idsList: number[] = JSON.parse(localStorage.getItem(key) || '');
-  return idsList.map((id) => getFilmById(id));
-};
-
-export const getCardsList = (type: string): IMovieCard[] => {
+const getCardsByType = (): IMovieCard[] => {
+  const type = useSelector((state: IStore) => state.listType);
+  const idListFavorite = useSelector((state: IStore) => state.favoriteFilms);
+  const idListWatchLater = useSelector((state: IStore) => state.watchLaterFilms);
   switch (type) {
-    case (favoriteFilmsKey):
-      return getCardsByIds(favoriteFilmsKey);
-    case (watchLaterKey):
-      return getCardsByIds(watchLaterKey);
-    default:
-      return MOVIES_DATA;
+    case (bookmarkTypes[1]):
+      return idListFavorite.map((id) => getFilmById(id));
+    case (bookmarkTypes[2]):
+      return idListWatchLater.map((id) => getFilmById(id));
+    default: return MOVIES_DATA;
   }
 };
 
-const filterByYear = (year: number): IMovieCard[] => MOVIES_DATA.filter((item) => new Date(item.release_date).getFullYear() === year);
+const filterByYear = (year: number): IMovieCard[] => getCardsByType().filter((item) => new Date(item.release_date).getFullYear() === year);
 
 const sortMoviesList = (list: IMovieCard[], sortingValue: string): IMovieCard[] => {
   switch (sortingValue) {

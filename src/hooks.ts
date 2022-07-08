@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { IStore } from './interfaces';
 import {
   closeLoginModal, logIn, logOut, openLoginModal,
-} from '../redux/actions';
+} from './redux/rootDir/actions';
 
 export default function useLoginModalStatus() {
   const loginModalStatus: boolean = useSelector((state: IStore) => state.isLoginModalOpen);

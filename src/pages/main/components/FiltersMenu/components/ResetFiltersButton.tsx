@@ -6,7 +6,7 @@ import {
   setMovieIndex,
   setReleaseYear,
   setSortingValue,
-} from '../../../../redux/actions';
+} from '../../../../../redux/rootDir/actions';
 import { SORTING_VALUES } from '../../MoviesList/filterList';
 
 const ResetFiltersButton = () => {

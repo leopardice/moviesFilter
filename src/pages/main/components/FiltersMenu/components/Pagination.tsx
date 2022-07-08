@@ -1,8 +1,8 @@
 import React from 'react';
 import { Grid, Button, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { IMovieCard, IStore } from '../../../interfaces';
-import { setMovieIndex } from '../../../../redux/actions';
+import { IMovieCard, IStore } from '../../../../../interfaces';
+import { setMovieIndex } from '../../../../../redux/rootDir/actions';
 import { getFilteredList } from '../../MoviesList/filterList';
 
 const Pagination = () => {

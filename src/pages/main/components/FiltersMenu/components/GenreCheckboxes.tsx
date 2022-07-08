@@ -2,9 +2,9 @@ import React, { SyntheticEvent } from 'react';
 import { FormControlLabel, FormGroup } from '@mui/material';
 import Checkbox from '@mui/material/Checkbox';
 import { useDispatch, useSelector } from 'react-redux';
-import { addGenre, removeGenre, setMovieIndex } from '../../../../redux/actions';
+import { addGenre, removeGenre, setMovieIndex } from '../../../../../redux/rootDir/actions';
 import { GENRES } from './genresData';
-import { IStore } from '../../../interfaces';
+import { IStore } from '../../../../../interfaces';
 
 const GenreItem = (props: {id: number, name: string}) => {
   const dispatch = useDispatch();

@@ -10,6 +10,13 @@ export const OPEN_LOGIN_MODAL = 'OPEN_LOGIN_MODAL';
 export const CLOSE_LOGIN_MODAL = 'CLOSE_LOGIN_MODAL';
 export const ADD_FILM_FAVORITE = 'ADD_FILM_FAVORITE';
 export const REMOVE_FILM_FAVORITE = 'REMOVE_FILM_FAVORITE';
+export const SET_FILM_FAVORITE = 'SET_FILM_FAVORITE';
+export const ADD_FILM_WATCH_LATER = 'ADD_FILM_WATCH_LATER';
+export const REMOVE_FILM_WATCH_LATER = 'REMOVE_FILM_WATCH_LATER';
+export const SET_LIST_TYPE = 'SET_LIST_TYPE';
+export const SET_RECOMMENDED_FILM_GENRE = 'SET_RECOMMENDED_FILM_GENRE';
+export const SET_RECOMMENDED_FILM_RATING = 'SET_RECOMMENDED_FILM_RATING';
+export const SET_RECOMMENDED_FILM_POPULARITY = 'SET_RECOMMENDED_FILM_POPULARITY';
 
 export function setMovieIndex(movieIndex: number) {
   return {
@@ -87,5 +94,47 @@ export function removeFilmFavorite(filmId: number) {
   return {
     type: REMOVE_FILM_FAVORITE,
     filmId,
+  };
+}
+
+export function addFilmWatchLater(filmId: number) {
+  return {
+    type: ADD_FILM_WATCH_LATER,
+    filmId,
+  };
+}
+
+export function removeFilmWatchLater(filmId: number) {
+  return {
+    type: REMOVE_FILM_WATCH_LATER,
+    filmId,
+  };
+}
+
+export function setListType(listType: string) {
+  return {
+    type: SET_LIST_TYPE,
+    listType,
+  };
+}
+
+export function setRecommendedGenre(genre: string) {
+  return {
+    type: SET_RECOMMENDED_FILM_GENRE,
+    genre,
+  };
+}
+
+export function setRecommendedFilmRating(rating: string) {
+  return {
+    type: SET_RECOMMENDED_FILM_RATING,
+    rating,
+  };
+}
+
+export function setRecommendedFilmPopularity(popularity: string) {
+  return {
+    type: SET_RECOMMENDED_FILM_POPULARITY,
+    popularity,
   };
 }

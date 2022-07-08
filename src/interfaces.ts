@@ -23,4 +23,7 @@ export interface IStore {
   isLoggedIn: boolean
   isLoginModalOpen: boolean
   favoriteFilms: number[]
+  watchLaterFilms: number[]
+  listType: string
+  recommendedFilmInfo: {genre: string, rating: string, popularity: string}
 }

@@ -8,7 +8,7 @@ import SelectYear from './components/SelectYear';
 import GenreCheckboxes from './components/GenreCheckboxes';
 import Pagination from './components/Pagination';
 import ResetFiltersButton from './components/ResetFiltersButton';
-import { IStore } from '../../interfaces';
+import { IStore } from '../../../../interfaces';
 import BookmarkSelect from './components/bookmark-select';
 
 const FiltersMenu = () => {

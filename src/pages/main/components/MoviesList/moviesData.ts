@@ -1,4 +1,4 @@
-import { IMovieCard } from '../../interfaces';
+import { IMovieCard } from '../../../../interfaces';
 
 const MOVIES_DATA: IMovieCard[] = [
   {

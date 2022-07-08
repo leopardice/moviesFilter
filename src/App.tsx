@@ -4,16 +4,14 @@ import {
   Container, createTheme, Grid, responsiveFontSizes, ThemeProvider,
 } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import FiltersMenu from './components/FiltersMenu/FiltersMenu';
-import Header from './components/Header/Header';
-import MoviesList from './components/MoviesList/MoviesList';
-import AuthorizationModal from './components/authorization-modal/auth-modal';
+import { Outlet } from 'react-router-dom';
+import FiltersMenu from './pages/main/components/FiltersMenu/FiltersMenu';
+import Header from './pages/main/components/Header/Header';
+import MoviesList from './pages/main/components/MoviesList/MoviesList';
+import AuthorizationModal from './pages/main/components/authorization-modal/auth-modal';
 import { IStore } from './interfaces';
-import { openLoginModal, closeLoginModal } from '../redux/actions';
+import { openLoginModal, closeLoginModal } from './redux/rootDir/actions';
 import { useAuthenticationStatus } from './hooks';
-
-let theme = createTheme();
-theme = responsiveFontSizes(theme);
 
 const App = () => {
   const [isAuthenticated, setAuthenticationStatus] = useAuthenticationStatus();
@@ -25,18 +23,11 @@ const App = () => {
   }, []);
 
   return (
-    <ThemeProvider theme={theme}>
-      <div className="App">
-        <Header />
-        <AuthorizationModal />
-        <Container>
-          <Grid container spacing={1}>
-            <FiltersMenu />
-            <MoviesList />
-          </Grid>
-        </Container>
-      </div>
-    </ThemeProvider>
+    <div className="App">
+      <Header />
+      <AuthorizationModal />
+      <Outlet />
+    </div>
   );
 };
 export default App;

@@ -1,12 +1,12 @@
 import React from 'react';
 import { BookmarkBorderOutlined } from '@mui/icons-material';
+import BookmarkIcon from '@mui/icons-material/Bookmark';
 import { Button } from '@mui/material';
 import { IFavoriteButton } from '../MovieCard';
+import { LOCAL_STORAGE_KEYS } from '../../../../../../utils';
 
-const watchLaterKey = 'watchLater';
-
-const AddWatchLaterButton = ({ onClick }: IFavoriteButton) => {
-  const handleClick = () => { onClick(watchLaterKey); };
+const AddWatchLaterButton = ({ onClick, isFilmInList }: IFavoriteButton) => {
+  const handleClick = () => { onClick(LOCAL_STORAGE_KEYS.watchLaterKey); };
 
   return (
     <Button
@@ -18,7 +18,9 @@ const AddWatchLaterButton = ({ onClick }: IFavoriteButton) => {
       }}
       aria-label="add to watch later"
     >
-      <BookmarkBorderOutlined sx={{ width: 12 }} />
+      {isFilmInList
+        ? <BookmarkIcon sx={{ width: 12 }} />
+        : <BookmarkBorderOutlined sx={{ width: 12 }} />}
     </Button>
   );
 };

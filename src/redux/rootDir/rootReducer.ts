@@ -6,10 +6,20 @@ import {
   SET_SORTING_VALUE,
   REMOVE_GENRE,
   CLEAR_GENRES,
-  LOG_IN, LOG_OUT, OPEN_LOGIN_MODAL, CLOSE_LOGIN_MODAL, ADD_FILM_FAVORITE, REMOVE_FILM_FAVORITE,
+  LOG_IN,
+  LOG_OUT,
+  OPEN_LOGIN_MODAL,
+  CLOSE_LOGIN_MODAL,
+  ADD_FILM_FAVORITE,
+  REMOVE_FILM_FAVORITE,
+  ADD_FILM_WATCH_LATER,
+  REMOVE_FILM_WATCH_LATER,
+  SET_LIST_TYPE,
+  SET_RECOMMENDED_FILM_GENRE, SET_RECOMMENDED_FILM_RATING, SET_RECOMMENDED_FILM_POPULARITY,
 } from './actions';
-import { SORTING_VALUES } from '../src/components/MoviesList/filterList';
-import { LOCAL_STORAGE_KEYS } from '../src/utils';
+import { SORTING_VALUES } from '../../pages/main/components/MoviesList/filterList';
+import { FILMS_BY_POPULARITY, FILMS_BY_RATING, LOCAL_STORAGE_KEYS } from '../../utils';
+import { bookmarkTypes } from '../../pages/main/components/FiltersMenu/components/bookmark-select';
 
 type movieIndexType = {
   type: string,
@@ -38,6 +48,19 @@ type isLoggedInType = {
 type storageListType = {
   type: string,
   filmId: number
+  filmList: number[]
+}
+
+type listTypeType = {
+  type: string,
+  listType: string
+}
+
+type recommendedFilmInfoType = {
+  type: string,
+  genre: string,
+  rating: string,
+  popularity: string
 }
 
 export const movieIndex = (state = 0, action: movieIndexType) => {
@@ -105,20 +128,73 @@ const isLoginModalOpen = (state: boolean = false, action: isLoggedInType) => {
   }
 };
 
-const favoriteFilms = (state: number[] = [], action: storageListType) => {
+const favoriteFilms = (state: number[] = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEYS.favoriteFilmsKey) || ''), action: storageListType) => {
   const { type, filmId } = action;
   let nextState: number[] = [];
   switch (type) {
     case ADD_FILM_FAVORITE:
       nextState = [...state, filmId];
       localStorage.setItem(LOCAL_STORAGE_KEYS.favoriteFilmsKey, JSON.stringify(nextState));
-      console.log(nextState);
       return nextState;
     case REMOVE_FILM_FAVORITE:
       nextState = state.filter((id) => id !== filmId);
       localStorage.setItem(LOCAL_STORAGE_KEYS.favoriteFilmsKey, JSON.stringify(nextState));
-      console.log(nextState);
       return nextState;
+    default:
+      return state;
+  }
+};
+
+const watchLaterFilms = (state: number[] = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEYS.watchLaterKey) || ''), action: storageListType) => {
+  const { type, filmId } = action;
+  let nextState: number[] = [];
+  switch (type) {
+    case ADD_FILM_WATCH_LATER:
+      nextState = [...state, filmId];
+      localStorage.setItem(LOCAL_STORAGE_KEYS.watchLaterKey, JSON.stringify(nextState));
+      return nextState;
+    case REMOVE_FILM_WATCH_LATER:
+      nextState = state.filter((id) => id !== filmId);
+      localStorage.setItem(LOCAL_STORAGE_KEYS.watchLaterKey, JSON.stringify(nextState));
+      return nextState;
+    default:
+      return state;
+  }
+};
+
+const listType = (state: string = bookmarkTypes[0], action: listTypeType) => {
+  switch (action.type) {
+    case SET_LIST_TYPE:
+      return action.listType;
+    default:
+      return state;
+  }
+};
+
+export const recommendedFilmInfo = (state = { genre: '35', rating: FILMS_BY_RATING.high, popularity: FILMS_BY_POPULARITY.popular }, action: recommendedFilmInfoType) => {
+  const {
+    type,
+    genre,
+    rating,
+    popularity,
+  } = action;
+
+  switch (type) {
+    case SET_RECOMMENDED_FILM_GENRE:
+      return {
+        ...state,
+        genre,
+      };
+    case SET_RECOMMENDED_FILM_RATING:
+      return {
+        ...state,
+        rating,
+      };
+    case SET_RECOMMENDED_FILM_POPULARITY:
+      return {
+        ...state,
+        popularity,
+      };
     default:
       return state;
   }
@@ -132,6 +208,9 @@ const rootReducer = combineReducers({
   isLoggedIn,
   isLoginModalOpen,
   favoriteFilms,
+  watchLaterFilms,
+  listType,
+  recommendedFilmInfo,
 });
 
 export default rootReducer;

@@ -2,13 +2,33 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { createTheme, responsiveFontSizes, ThemeProvider } from '@mui/material';
 import App from './App';
-import rootReducer from '/redux/rootReducer';
+import rootReducer from './redux/rootDir/rootReducer';
+import DetailsPage from './pages/details/details-page';
+import MainPage from './pages/main/main-page';
+import SearchPage from './pages/search/search-page';
 
 const store = createStore(rootReducer);
+let theme = createTheme({
+  typography: {
+  },
+});
+theme = responsiveFontSizes(theme);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
+  <BrowserRouter>
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <Routes>
+          <Route path="/" element={<App />}>
+            <Route path="/" element={<MainPage />} />
+            <Route path="details/:filmId" element={<DetailsPage />} />
+            <Route path="/search" element={<SearchPage />} />
+          </Route>
+        </Routes>
+      </ThemeProvider>
+    </Provider>
+  </BrowserRouter>,
 );
