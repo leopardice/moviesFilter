@@ -5,7 +5,7 @@ import {
 import { SelectChangeEvent } from '@mui/material/Select';
 import { useDispatch, useSelector } from 'react-redux';
 import { setMovieIndex, setReleaseYear } from '../../../../../redux/rootDir/actions';
-import { IStore } from '../../../../../interfaces';
+import { IStore } from '../../../../../redux/rootDir/interfaces';
 
 const YEARS = [2017, 2018, 2019, 2020];
 

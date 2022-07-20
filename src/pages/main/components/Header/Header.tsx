@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
-import useLoginModalStatus, { useAuthenticationStatus } from '../../../../hooks';
+import useLoginModalStatus, { useAuthenticationStatus } from '../../../../shared/hooks';
 
 const Header = () => {
   const [isModalOpen, setLoginModalStatus] = useLoginModalStatus();

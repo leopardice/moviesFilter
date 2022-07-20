@@ -1,7 +1,6 @@
 import { useSelector } from 'react-redux';
-import { IMovieCard, IStore } from '../../../../interfaces';
-import MOVIES_DATA from './moviesData';
-import { LOCAL_STORAGE_KEYS } from '../../../../utils';
+import { IMovieCard, IStore } from '../../../../redux/rootDir/interfaces';
+import MOVIES_DATA from '../../../../shared/api/moviesData';
 import { bookmarkTypes } from '../FiltersMenu/components/bookmark-select';
 
 export const SORTING_VALUES = {

@@ -4,7 +4,7 @@ import Checkbox from '@mui/material/Checkbox';
 import { useDispatch, useSelector } from 'react-redux';
 import { addGenre, removeGenre, setMovieIndex } from '../../../../../redux/rootDir/actions';
 import { GENRES } from './genresData';
-import { IStore } from '../../../../../interfaces';
+import { IStore } from '../../../../../redux/rootDir/interfaces';
 
 const GenreItem = (props: {id: number, name: string}) => {
   const dispatch = useDispatch();

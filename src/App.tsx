@@ -9,25 +9,24 @@ import FiltersMenu from './pages/main/components/FiltersMenu/FiltersMenu';
 import Header from './pages/main/components/Header/Header';
 import MoviesList from './pages/main/components/MoviesList/MoviesList';
 import AuthorizationModal from './pages/main/components/authorization-modal/auth-modal';
-import { IStore } from './interfaces';
+import { IStore } from './redux/rootDir/interfaces';
 import { openLoginModal, closeLoginModal } from './redux/rootDir/actions';
-import { useAuthenticationStatus } from './hooks';
+import { useAuthenticationStatus } from './shared/hooks';
 
-const App = () => {
-  const [isAuthenticated, setAuthenticationStatus] = useAuthenticationStatus();
+const App = () =>
+// const [isAuthenticated, setAuthenticationStatus] = useAuthenticationStatus();
+//
+// useEffect(() => {
+//   const isLoggedIn = localStorage.getItem('isLoggedIn');
+//   if (isLoggedIn === 'true') setAuthenticationStatus(true);
+//   else setAuthenticationStatus(false);
+// }, []);
 
-  useEffect(() => {
-    const isLoggedIn = localStorage.getItem('isLoggedIn');
-    if (isLoggedIn === 'true') setAuthenticationStatus(true);
-    else setAuthenticationStatus(false);
-  }, []);
-
-  return (
+  (
     <div className="App">
       <Header />
       <AuthorizationModal />
       <Outlet />
     </div>
   );
-};
 export default App;

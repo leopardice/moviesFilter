@@ -1,5 +1,6 @@
 export const SET_SORTING_VALUE = 'UPDATE_SORTING_VALUE';
 export const SET_MOVIE_INDEX = 'SET_MOVIE_INDEX';
+export const SET_CURRENT_PAGE = 'CURRENT_PAGE';
 export const SET_RELEASE_YEAR = 'SET_RELEASE_YEAR';
 export const ADD_GENRE = 'ADD_GENRE';
 export const REMOVE_GENRE = 'REMOVE_GENRE';
@@ -13,10 +14,18 @@ export const REMOVE_FILM_FAVORITE = 'REMOVE_FILM_FAVORITE';
 export const SET_FILM_FAVORITE = 'SET_FILM_FAVORITE';
 export const ADD_FILM_WATCH_LATER = 'ADD_FILM_WATCH_LATER';
 export const REMOVE_FILM_WATCH_LATER = 'REMOVE_FILM_WATCH_LATER';
+export const SET_WATCH_LATER_FILMS = 'SET_WATCH_LATER_FILMS';
 export const SET_LIST_TYPE = 'SET_LIST_TYPE';
 export const SET_RECOMMENDED_FILM_GENRE = 'SET_RECOMMENDED_FILM_GENRE';
 export const SET_RECOMMENDED_FILM_RATING = 'SET_RECOMMENDED_FILM_RATING';
 export const SET_RECOMMENDED_FILM_POPULARITY = 'SET_RECOMMENDED_FILM_POPULARITY';
+
+export function setCurrentPage(currentPage: number) {
+  return {
+    type: SET_CURRENT_PAGE,
+    currentPage,
+  };
+}
 
 export function setMovieIndex(movieIndex: number) {
   return {
@@ -97,6 +106,13 @@ export function removeFilmFavorite(filmId: number) {
   };
 }
 
+export function setFilmFavorite(filmList: number[]) {
+  return {
+    type: SET_FILM_FAVORITE,
+    filmList,
+  };
+}
+
 export function addFilmWatchLater(filmId: number) {
   return {
     type: ADD_FILM_WATCH_LATER,
@@ -108,6 +124,13 @@ export function removeFilmWatchLater(filmId: number) {
   return {
     type: REMOVE_FILM_WATCH_LATER,
     filmId,
+  };
+}
+
+export function setWatchLaterFilms(filmList: number[]) {
+  return {
+    type: SET_WATCH_LATER_FILMS,
+    filmList,
   };
 }
 

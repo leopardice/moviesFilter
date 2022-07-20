@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Grid, Paper, Button, Typography, Box,
 } from '@mui/material';
@@ -6,13 +6,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import AddFavoriteButton from './components/add-favorite-button';
 import AddWatchLaterButton from './components/add-watch-later-button';
-import useLoginModalStatus, { useAuthenticationStatus } from '../../../../../hooks';
-import { IStore } from '../../../../../interfaces';
+import useLoginModalStatus, { useAuthenticationStatus } from '../../../../../shared/hooks';
+import { IStore } from '../../../../../redux/rootDir/interfaces';
 import {
   addFilmFavorite,
   addFilmWatchLater,
   removeFilmFavorite,
-  removeFilmWatchLater,
+  removeFilmWatchLater, setFilmFavorite, setWatchLaterFilms,
 } from '../../../../../redux/rootDir/actions';
 import { isIdInList, LOCAL_STORAGE_KEYS } from '../../../../../utils';
 import DetailsPage from '../../../../details/details-page';
@@ -31,35 +31,44 @@ export interface IFavoriteButton {
 }
 
 const MovieCard = ({
-  rating, title, imagePath, id, detailsText,
+  rating, title, imagePath, id,
 }: MovieCardProps) => {
-  const [isModalOpen, setLoginModalStatus] = useLoginModalStatus();
-  const [isAuthenticated, setAuthenticationStatus] = useAuthenticationStatus();
-
-  const favoriteFilms = useSelector((state: IStore) => state.favoriteFilms);
-  const watchLaterFilms = useSelector((state: IStore) => state.watchLaterFilms);
-
-  const dispatch = useDispatch();
-
-  const isFilmInFavorite = isIdInList(id, favoriteFilms);
-  const isFilmInWatchLater = isIdInList(id, watchLaterFilms);
+  // const [isModalOpen, setLoginModalStatus] = useLoginModalStatus();
+  // const [isAuthenticated, setAuthenticationStatus] = useAuthenticationStatus();
+  //
+  // const dispatch = useDispatch();
+  //
+  // useEffect(() => {
+  //   const favoriteFilms = localStorage.getItem(LOCAL_STORAGE_KEYS.favoriteFilmsKey);
+  //   if (!favoriteFilms) localStorage.setItem(LOCAL_STORAGE_KEYS.favoriteFilmsKey, '[]');
+  //   dispatch(setFilmFavorite(JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEYS.favoriteFilmsKey) || '')));
+  //   const watchLaterFilms = localStorage.getItem(LOCAL_STORAGE_KEYS.watchLaterKey);
+  //   if (!watchLaterFilms) localStorage.setItem(LOCAL_STORAGE_KEYS.watchLaterKey, '[]');
+  //   dispatch(setWatchLaterFilms(JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEYS.watchLaterKey) || '')));
+  // }, []);
+  //
+  // const favoriteFilms = useSelector((state: IStore) => state.favoriteFilms);
+  // const watchLaterFilms = useSelector((state: IStore) => state.watchLaterFilms);
+  //
+  // const isFilmInFavorite = isIdInList(id, favoriteFilms);
+  // const isFilmInWatchLater = isIdInList(id, watchLaterFilms);
 
   const handleListButtonClick = (key: string) => {
-    if (!isAuthenticated) {
-      setLoginModalStatus(true);
-      return;
-    }
-    switch (key) {
-      case LOCAL_STORAGE_KEYS.favoriteFilmsKey:
-        if (isFilmInFavorite) dispatch(removeFilmFavorite(id));
-        else dispatch(addFilmFavorite(id));
-        break;
-      case LOCAL_STORAGE_KEYS.watchLaterKey:
-        if (isFilmInWatchLater) dispatch(removeFilmWatchLater(id));
-        else dispatch(addFilmWatchLater(id));
-        break;
-      default:
-    }
+    // if (!isAuthenticated) {
+    //   setLoginModalStatus(true);
+    //   return;
+    // }
+    // switch (key) {
+    //   case LOCAL_STORAGE_KEYS.favoriteFilmsKey:
+    //     if (isFilmInFavorite) dispatch(removeFilmFavorite(id));
+    //     else dispatch(addFilmFavorite(id));
+    //     break;
+    //   case LOCAL_STORAGE_KEYS.watchLaterKey:
+    //     if (isFilmInWatchLater) dispatch(removeFilmWatchLater(id));
+    //     else dispatch(addFilmWatchLater(id));
+    //     break;
+    //   default:
+    // }
   };
 
   return (
@@ -94,11 +103,11 @@ const MovieCard = ({
               </Typography>
               <AddFavoriteButton
                 onClick={handleListButtonClick}
-                isFilmInList={isFilmInFavorite}
+                // isFilmInList={isFilmInFavorite}
               />
               <AddWatchLaterButton
                 onClick={handleListButtonClick}
-                isFilmInList={isFilmInWatchLater}
+                // isFilmInList={isFilmInWatchLater}
               />
             </Box>
             <Grid item>

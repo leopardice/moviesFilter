@@ -4,7 +4,7 @@ import React, {
 import {
   Dialog, DialogTitle, DialogContent, TextField, DialogActions, Button, FormControl,
 } from '@mui/material';
-import useLoginModalStatus, { useAuthenticationStatus } from '../../../../hooks';
+import useLoginModalStatus, { useAuthenticationStatus } from '../../../../shared/hooks';
 
 export interface IUserInfo {
   login: string;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import {
   Box, Button,
   Container, FormControl, MenuItem, Select, Stack, Typography,
@@ -7,13 +7,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { SelectChangeEvent } from '@mui/material/Select';
 import { Link } from 'react-router-dom';
 import { GENRES } from '../main/components/FiltersMenu/components/genresData';
-import { IMovieCard, IStore } from '../../interfaces';
+import { IMovieCard, IStore } from '../../redux/rootDir/interfaces';
 import {
   setRecommendedFilmPopularity,
   setRecommendedFilmRating,
   setRecommendedGenre,
 } from '../../redux/rootDir/actions';
-import MOVIES_DATA from '../main/components/MoviesList/moviesData';
+import MOVIES_DATA from '../../shared/api/moviesData';
 import { FILMS_BY_POPULARITY, FILMS_BY_RATING, imgHost } from '../../utils';
 
 const SearchPage = () => {
@@ -21,6 +21,7 @@ const SearchPage = () => {
   const dispatch = useDispatch();
   const { genre, rating, popularity } = useSelector((state: IStore) => state.recommendedFilmInfo);
 
+  const genreValue = useMemo(() => genre, [genre]);
   const handleGenreSelectChange = (event: SelectChangeEvent) => {
     dispatch(setRecommendedGenre(event.target.value));
     setIndex(0);
@@ -66,13 +67,17 @@ const SearchPage = () => {
     setIndex(index + 1);
   };
 
+  const genreTitle = React.useMemo(() => (
+    'Choose film genre:'
+  ), []);
+
   return (
     <Container>
-      <Typography variant="body1" component="p">Choose film genre:</Typography>
+      <Typography variant="body1" component="p">{genreTitle}</Typography>
       <FormControl fullWidth>
         <Select
           onChange={handleGenreSelectChange}
-          value={genre}
+          value={genreValue}
         >
           {GENRES.map(({ name, id }) => <MenuItem key={id} value={id.toString()}>{name}</MenuItem>)}
         </Select>
@@ -137,7 +142,7 @@ const SearchPage = () => {
             </Stack>
           </Box>
         )
-        : ''}
+        : <div>There is no such film</div>}
       <Stack direction="row" justifyContent="space-between" sx={{ padding: '0 5rem' }}>
         <Link className="pages-link" to={likeButtonLink}><Button variant="contained">Like</Button></Link>
         <Button variant="contained" onClick={dislikeButtonHandler}>Dislike</Button>

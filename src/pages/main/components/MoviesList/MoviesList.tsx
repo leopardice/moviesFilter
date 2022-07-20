@@ -1,21 +1,24 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Grid } from '@mui/material';
-import { IMovieCard, IStore } from '../../../../interfaces';
+import { IMovieCard, IStore } from '../../../../redux/rootDir/interfaces';
 import MovieCard from './MovieCard/MovieCard';
 import {
   getFilteredList,
 } from './filterList';
+import MOVIES_DATA from '../../../../shared/api/moviesData';
+import { useAppSelector } from '../../../../shared/hooks';
 
 const MoviesList = () => {
-  const movieIndex = useSelector((state: IStore) => state.movieIndex);
+  const currentPage = useAppSelector((state) => state.currentPage.value);
 
-  const showCurrentPageMovies = (moviesData: IMovieCard[], startIndex: number) : IMovieCard[] => {
-    const endPosition = startIndex + 10;
-    return moviesData.slice(startIndex, endPosition);
+  const showCurrentPageCards = (moviesData: IMovieCard[], page: number) : IMovieCard[] => {
+    const endPosition = (page * 10) + 1;
+    const start = endPosition - 10;
+    return moviesData.slice(start, endPosition);
   };
 
-  const cardsToShow = showCurrentPageMovies(getFilteredList(), movieIndex);
+  const cardsToShow = showCurrentPageCards(MOVIES_DATA, currentPage);
 
   return (
     <Grid item container xs={9} spacing={1}>

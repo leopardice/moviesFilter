@@ -1,8 +1,14 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { IStore } from './interfaces';
+import {
+  useDispatch, useSelector, TypedUseSelectorHook, useDispatch, useSelector,
+} from 'react-redux';
+import { IStore } from '../redux/rootDir/interfaces';
 import {
   closeLoginModal, logIn, logOut, openLoginModal,
-} from './redux/rootDir/actions';
+} from '../redux/rootDir/actions';
+import { RootState, AppDispatch } from './store';
+
+export const useAppDispatch = () => useDispatch<AppDispatch>();
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
 export default function useLoginModalStatus() {
   const loginModalStatus: boolean = useSelector((state: IStore) => state.isLoginModalOpen);

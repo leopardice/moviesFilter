@@ -6,7 +6,7 @@ import { SelectChangeEvent } from '@mui/material/Select';
 import { useDispatch, useSelector } from 'react-redux';
 import { SORTING_VALUES } from '../../MoviesList/filterList';
 import { setMovieIndex, setSortingValue } from '../../../../../redux/rootDir/actions';
-import { IStore } from '../../../../../interfaces';
+import { IStore } from '../../../../../redux/rootDir/interfaces';
 
 const SortingMenu = () => {
   const dispatch = useDispatch();

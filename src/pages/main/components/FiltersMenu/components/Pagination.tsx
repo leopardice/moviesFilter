@@ -1,35 +1,32 @@
 import React from 'react';
 import { Grid, Button, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { IMovieCard, IStore } from '../../../../../interfaces';
-import { setMovieIndex } from '../../../../../redux/rootDir/actions';
+import { IMovieCard, IStore } from '../../../../../redux/rootDir/interfaces';
+import { setCurrentPage, setMovieIndex } from '../../../../../redux/rootDir/actions';
 import { getFilteredList } from '../../MoviesList/filterList';
+import { useAppDispatch, useAppSelector } from '../../../../../shared/hooks';
+import { nextPage, previousPage } from '../../../../../shared/features/current-page';
 
 const Pagination = () => {
-  const getCurrentPage = (index: number) : number => {
-    const currentPage = Math.round((index + 10) / 10);
-    return currentPage;
-  };
-
   const getNumberOfPages = (array: IMovieCard[]) : number => {
     const numberOfPages = Math.ceil((array.length) / 10);
     return numberOfPages;
   };
 
-  const movieIndex = useSelector((state: IStore) => state.movieIndex);
-  const currentPage = getCurrentPage(movieIndex);
+  const currentPage = useAppSelector((state) => state.currentPage.value);
+
   const numberOfPages = getNumberOfPages(getFilteredList());
   const backwardsButtonDisabled = (currentPage === 1);
   const forwardButtonDisabled = (currentPage === numberOfPages);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const forwardButtonHandler = () => {
-    dispatch(setMovieIndex(movieIndex + 10));
+    dispatch(nextPage());
   };
 
   const backwardsButtonHandler = () => {
-    dispatch(setMovieIndex(movieIndex - 10));
+    dispatch(previousPage());
   };
 
   return (

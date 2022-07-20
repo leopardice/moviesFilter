@@ -3,7 +3,7 @@ import {
   Box, Container, Stack, Typography, Divider,
 } from '@mui/material';
 import { useParams } from 'react-router-dom';
-import { IMovieCard } from '../../interfaces';
+import { IMovieCard } from '../../redux/rootDir/interfaces';
 import { getFilteredList } from '../main/components/MoviesList/filterList';
 
 const DetailsPage = () => {

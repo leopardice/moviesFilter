@@ -4,7 +4,7 @@ import {
   FormControl, MenuItem, Select, Typography,
 } from '@mui/material';
 import { SelectChangeEvent } from '@mui/material/Select';
-import { IStore } from '../../../../../interfaces';
+import { IStore } from '../../../../../redux/rootDir/interfaces';
 import { setListType, setMovieIndex } from '../../../../../redux/rootDir/actions';
 
 export const bookmarkTypes = ['Все фильмы', 'Избранное', 'Смотреть позже'];

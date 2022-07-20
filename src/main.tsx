@@ -1,23 +1,20 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { createTheme, responsiveFontSizes, ThemeProvider } from '@mui/material';
-import App from './App';
-import rootReducer from './redux/rootDir/rootReducer';
-import DetailsPage from './pages/details/details-page';
-import MainPage from './pages/main/main-page';
-import SearchPage from './pages/search/search-page';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { Provider } from "react-redux";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { createTheme, responsiveFontSizes, ThemeProvider } from "@mui/material";
+import App from "./App";
+import DetailsPage from "./pages/details/details-page";
+import MainPage from "./pages/main/main-page";
+import SearchPage from "./pages/search/search-page";
+import { store } from "./shared/store";
 
-const store = createStore(rootReducer);
 let theme = createTheme({
-  typography: {
-  },
+  typography: {},
 });
 theme = responsiveFontSizes(theme);
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+ReactDOM.createRoot(document.getElementById("root")!).render(
   <BrowserRouter>
     <Provider store={store}>
       <ThemeProvider theme={theme}>
@@ -30,5 +27,5 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         </Routes>
       </ThemeProvider>
     </Provider>
-  </BrowserRouter>,
+  </BrowserRouter>
 );
