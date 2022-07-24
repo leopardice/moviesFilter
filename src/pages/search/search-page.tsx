@@ -1,152 +1,119 @@
-import React, { useMemo, useState } from 'react';
-import {
-  Box, Button,
-  Container, FormControl, MenuItem, Select, Stack, Typography,
-} from '@mui/material';
-import { useDispatch, useSelector } from 'react-redux';
-import { SelectChangeEvent } from '@mui/material/Select';
-import { Link } from 'react-router-dom';
-import { GENRES } from '../main/components/FiltersMenu/components/genresData';
-import { IMovieCard, IStore } from '../../redux/rootDir/interfaces';
-import {
-  setRecommendedFilmPopularity,
-  setRecommendedFilmRating,
-  setRecommendedGenre,
-} from '../../redux/rootDir/actions';
-import MOVIES_DATA from '../../shared/api/moviesData';
-import { FILMS_BY_POPULARITY, FILMS_BY_RATING, imgHost } from '../../utils';
+import React, { useMemo, useState } from "react";
+import { Box, Container } from "@mui/material";
+import { SelectChangeEvent } from "@mui/material/Select";
+import { getFilmsData } from "../../shared/api/api";
+import GenresFilter from "./components/genres-filter/genres-filter";
+import RatingFilter from "./components/rating-filter/rating-filter";
+import getRecommendedFilms from "./components/utils";
+import ratingFilter from "./components/rating-filter/rating-filter";
+import PopularityFilter, {
+  FILMS_BY_POPULARITY,
+} from "./components/popularity-filter/popularity-filter";
+import RecommendedFilms from "./components/recommended-films/recommended-films";
+import Controls from "./components/controls/controls";
 
 const SearchPage = () => {
   const [index, setIndex] = useState(0);
-  const dispatch = useDispatch();
-  const { genre, rating, popularity } = useSelector((state: IStore) => state.recommendedFilmInfo);
+  const [genre, setGenre] = useState("");
+  const [rating, setRating] = useState("");
+  const [popularity, setPopularity] = useState("");
+  const [visibility, setVisibility] = useState({
+    ratingFilter: false,
+    popularityFilter: false,
+    filmCard: false,
+  });
 
-  const genreValue = useMemo(() => genre, [genre]);
   const handleGenreSelectChange = (event: SelectChangeEvent) => {
-    dispatch(setRecommendedGenre(event.target.value));
+    setGenre(event.target.value);
+    setVisibility((prevState) =>
+      Object.assign(prevState, { ratingFilter: true })
+    );
     setIndex(0);
   };
-
-  const { high, low } = FILMS_BY_RATING;
 
   const handleRatingSelectChange = (event: SelectChangeEvent) => {
-    dispatch(setRecommendedFilmRating(event.target.value));
+    setRating(event.target.value);
+    setVisibility((prevState) =>
+      Object.assign(prevState, { popularityFilter: true })
+    );
     setIndex(0);
   };
-
-  const { popular, unknown } = FILMS_BY_POPULARITY;
 
   const handlePopularitySelectChange = (event: SelectChangeEvent) => {
-    dispatch(setRecommendedFilmPopularity(event.target.value));
+    setPopularity(event.target.value);
+    setVisibility((prevState) => Object.assign(prevState, { filmCard: true }));
     setIndex(0);
   };
 
-  const getFilmByGenreId = (genreIds: number[], id: number) => genreIds.includes(id);
-  const getHighRatingFilms = (filmsData: IMovieCard[]) => filmsData.filter((card) => card.vote_average > 5);
-  const getLowRatingFilms = (filmsData: IMovieCard[]) => filmsData.filter((card) => card.vote_average <= 5);
-  const getPopularFilms = (filmsData: IMovieCard[]) => filmsData.filter((card) => card.popularity > 100 && card.vote_count > 200);
-  const getUnknownFilms = (filmsData: IMovieCard[]) => filmsData.filter((card) => card.popularity <= 100 && card.vote_count <= 200);
-
-  const getRecommendedFilms = (genreId: string, filmRating: string, popularityType: string): IMovieCard[] => {
-    const recommendedByGenre = MOVIES_DATA.filter((item) => getFilmByGenreId(item.genre_ids, Number(genreId)));
-    const recommendedByRating = filmRating === high
-      ? getHighRatingFilms(recommendedByGenre)
-      : getLowRatingFilms(recommendedByGenre);
-    const recommendedByPopularity = popularityType === popular
-      ? getPopularFilms(recommendedByRating)
-      : getUnknownFilms(recommendedByRating);
-    return recommendedByPopularity;
-  };
-
-  const recommendedFilms = getRecommendedFilms(genre, rating, popularity);
-  const filmCardToShow = recommendedFilms[index];
-  const isFilmCardExist = !!filmCardToShow;
-  const likeButtonLink = isFilmCardExist ? `/details/${filmCardToShow.id}` : '/search';
+  const recommendedFilms = getRecommendedFilms(
+    getFilmsData(),
+    +genre,
+    rating,
+    popularity
+  );
 
   const dislikeButtonHandler = () => {
     setIndex(index + 1);
   };
 
-  const genreTitle = React.useMemo(() => (
-    'Choose film genre:'
-  ), []);
+  const getRatingSelect = () => {
+    if (visibility.ratingFilter) {
+      return (
+        <RatingFilter rating={rating} onChange={handleRatingSelectChange} />
+      );
+    }
+    return "";
+  };
+
+  const getPopularitySelect = () => {
+    if (visibility.popularityFilter) {
+      return (
+        <PopularityFilter
+          popularity={popularity}
+          onChange={handlePopularitySelectChange}
+        />
+      );
+    }
+    return "";
+  };
+
+  const filmCard = recommendedFilms[index];
+
+  const getFilmCardTab = () => {
+    if (filmCard && visibility.filmCard) {
+      const {
+        poster_path: poster,
+        title,
+        vote_average: filmRating,
+        backdrop_path: background,
+      } = filmCard;
+      return (
+        <Box>
+          <RecommendedFilms
+            poster={poster}
+            title={title}
+            rating={filmRating}
+            background={background}
+          />
+          <Controls
+            onDislikeClick={dislikeButtonHandler}
+            idLink={filmCard.id}
+          />
+        </Box>
+      );
+    }
+    if (!filmCard && visibility.filmCard) {
+      return "There is no such film. Change filter values";
+    }
+    return "";
+  };
 
   return (
     <Container>
-      <Typography variant="body1" component="p">{genreTitle}</Typography>
-      <FormControl fullWidth>
-        <Select
-          onChange={handleGenreSelectChange}
-          value={genreValue}
-        >
-          {GENRES.map(({ name, id }) => <MenuItem key={id} value={id.toString()}>{name}</MenuItem>)}
-        </Select>
-      </FormControl>
-      <FormControl>
-        <Typography variant="body1" component="p">Choose film rating:</Typography>
-        <Select
-          onChange={handleRatingSelectChange}
-          value={rating}
-        >
-          <MenuItem key={1} value={high}>{high}</MenuItem>
-          <MenuItem key={2} value={low}>{low}</MenuItem>
-        </Select>
-      </FormControl>
-      <FormControl>
-        <Typography variant="body1" component="p">Choose film popularity:</Typography>
-        <Select
-          onChange={handlePopularitySelectChange}
-          value={popularity}
-        >
-          <MenuItem key={1} value={popular}>{popular}</MenuItem>
-          <MenuItem key={2} value={unknown}>{unknown}</MenuItem>
-        </Select>
-      </FormControl>
-      {isFilmCardExist
-        ? (
-          <Box
-            className="film-description-container"
-            sx={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              backgroundImage: `url(${imgHost}${filmCardToShow.backdrop_path})`,
-              backgroundPosition: '50% 0',
-              backgroundRepeat: 'no-repeat',
-              backgroundSize: 'cover',
-              height: '30vh',
-              gap: '2rem',
-              padding: '0 5rem',
-            }}
-          >
-            <Box sx={{ height: '100%', alignItems: 'center', display: 'flex' }}>
-              <img
-                src={`${imgHost}${filmCardToShow.poster_path}`}
-                alt="movie-poster"
-                className="film-poster"
-                height="80%"
-              />
-            </Box>
-            <Stack
-              className="film-description"
-              spacing={1}
-            >
-              <Typography className="film-tittle" variant="h4" component="h4" color="white">
-                {filmCardToShow.title}
-              </Typography>
-              <Typography className="film-rating" variant="body1" component="h4" color="white">
-                Рейтинг:
-                {' '}
-                {filmCardToShow.vote_average}
-              </Typography>
-            </Stack>
-          </Box>
-        )
-        : <div>There is no such film</div>}
-      <Stack direction="row" justifyContent="space-between" sx={{ padding: '0 5rem' }}>
-        <Link className="pages-link" to={likeButtonLink}><Button variant="contained">Like</Button></Link>
-        <Button variant="contained" onClick={dislikeButtonHandler}>Dislike</Button>
-      </Stack>
+      <GenresFilter genre={genre} onChange={handleGenreSelectChange} />
+      {getRatingSelect()}
+      {getPopularitySelect()}
+      {getFilmCardTab()}
     </Container>
   );
 };

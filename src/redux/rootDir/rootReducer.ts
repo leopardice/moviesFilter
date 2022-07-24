@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from "redux";
 import {
   ADD_GENRE,
   SET_MOVIE_INDEX,
@@ -18,58 +18,64 @@ import {
   SET_RECOMMENDED_FILM_GENRE,
   SET_RECOMMENDED_FILM_RATING,
   SET_RECOMMENDED_FILM_POPULARITY,
-  SET_FILM_FAVORITE, SET_WATCH_LATER_FILMS, SET_CURRENT_PAGE,
-} from './actions';
-import { SORTING_VALUES } from '../../pages/main/components/MoviesList/filterList';
-import { FILMS_BY_POPULARITY, FILMS_BY_RATING, LOCAL_STORAGE_KEYS } from '../../utils';
-import { bookmarkTypes } from '../../pages/main/components/FiltersMenu/components/bookmark-select';
+  SET_FILM_FAVORITE,
+  SET_WATCH_LATER_FILMS,
+  SET_CURRENT_PAGE,
+} from "./actions";
+import { SORTING_VALUES } from "../../pages/main/components/MoviesList/filterList";
+import {
+  FILMS_BY_POPULARITY,
+  FILMS_BY_RATING,
+  LOCAL_STORAGE_KEYS,
+} from "../../shared/utils";
+import { bookmarkTypes } from "../../pages/main/components/FiltersMenu/components/list-type-select";
 
 type currentPageType = {
-  type: string,
-  currentPage?: number
+  type: string;
+  currentPage?: number;
 };
 
 type movieIndexType = {
-  type: string,
-  movieIndex: number
+  type: string;
+  movieIndex: number;
 };
 
 type releaseYearType = {
-  type: string,
-  releaseYear: number
-}
+  type: string;
+  releaseYear: number;
+};
 
 type sortingValueType = {
-  type: string,
-  sortingValue: string
-}
+  type: string;
+  sortingValue: string;
+};
 
 type chosenGenresType = {
-  type: string,
-  genreId?: number,
-}
+  type: string;
+  genreId?: number;
+};
 
 type isLoggedInType = {
-  type: string
-}
+  type: string;
+};
 
 type storageListType = {
-  type: string,
-  filmId: number
-  filmList: number[]
-}
+  type: string;
+  filmId: number;
+  filmList: number[];
+};
 
 type listTypeType = {
-  type: string,
-  listType: string
-}
+  type: string;
+  listType: string;
+};
 
 type recommendedFilmInfoType = {
-  type: string,
-  genre: string,
-  rating: string,
-  popularity: string
-}
+  type: string;
+  genre: string;
+  rating: string;
+  popularity: string;
+};
 
 export const currentPage = (state = 1, action: currentPageType) => {
   switch (action.type) {
@@ -98,7 +104,10 @@ export const releaseYear = (state = 2020, action: releaseYearType) => {
   }
 };
 
-const sortingValue = (state = SORTING_VALUES.highToLow, action: sortingValueType) => {
+const sortingValue = (
+  state = SORTING_VALUES.highToLow,
+  action: sortingValueType
+) => {
   switch (action.type) {
     case SET_SORTING_VALUE:
       return action.sortingValue;
@@ -124,10 +133,10 @@ const chosenGenres = (state: number[] = [], action: chosenGenresType) => {
 const isLoggedIn = (state: boolean = false, action: isLoggedInType) => {
   switch (action.type) {
     case LOG_IN:
-      localStorage.setItem('isLoggedIn', 'true');
+      localStorage.setItem("isLoggedIn", "true");
       return true;
     case LOG_OUT:
-      localStorage.setItem('isLoggedIn', 'false');
+      localStorage.setItem("isLoggedIn", "false");
       return false;
     default:
       return state;
@@ -145,17 +154,23 @@ const isLoginModalOpen = (state: boolean = false, action: isLoggedInType) => {
   }
 };
 
-const favoriteFilms = (state:number[] = [], action: storageListType) => {
+const favoriteFilms = (state: number[] = [], action: storageListType) => {
   const { type, filmId, filmList } = action;
   let nextState: number[] = [];
   switch (type) {
     case ADD_FILM_FAVORITE:
       nextState = [...state, filmId];
-      localStorage.setItem(LOCAL_STORAGE_KEYS.favoriteFilmsKey, JSON.stringify(nextState));
+      localStorage.setItem(
+        LOCAL_STORAGE_KEYS.favoriteFilmsKey,
+        JSON.stringify(nextState)
+      );
       return nextState;
     case REMOVE_FILM_FAVORITE:
       nextState = state.filter((id) => id !== filmId);
-      localStorage.setItem(LOCAL_STORAGE_KEYS.favoriteFilmsKey, JSON.stringify(nextState));
+      localStorage.setItem(
+        LOCAL_STORAGE_KEYS.favoriteFilmsKey,
+        JSON.stringify(nextState)
+      );
       return nextState;
     case SET_FILM_FAVORITE:
       return filmList;
@@ -170,11 +185,17 @@ const watchLaterFilms = (state: number[] = [], action: storageListType) => {
   switch (type) {
     case ADD_FILM_WATCH_LATER:
       nextState = [...state, filmId];
-      localStorage.setItem(LOCAL_STORAGE_KEYS.watchLaterKey, JSON.stringify(nextState));
+      localStorage.setItem(
+        LOCAL_STORAGE_KEYS.watchLaterKey,
+        JSON.stringify(nextState)
+      );
       return nextState;
     case REMOVE_FILM_WATCH_LATER:
       nextState = state.filter((id) => id !== filmId);
-      localStorage.setItem(LOCAL_STORAGE_KEYS.watchLaterKey, JSON.stringify(nextState));
+      localStorage.setItem(
+        LOCAL_STORAGE_KEYS.watchLaterKey,
+        JSON.stringify(nextState)
+      );
       return nextState;
     case SET_WATCH_LATER_FILMS:
       return filmList;
@@ -192,13 +213,15 @@ const listType = (state: string = bookmarkTypes[0], action: listTypeType) => {
   }
 };
 
-export const recommendedFilmInfo = (state = { genre: '35', rating: FILMS_BY_RATING.high, popularity: FILMS_BY_POPULARITY.popular }, action: recommendedFilmInfoType) => {
-  const {
-    type,
-    genre,
-    rating,
-    popularity,
-  } = action;
+export const recommendedFilmInfo = (
+  state = {
+    genre: "35",
+    rating: FILMS_BY_RATING.high,
+    popularity: FILMS_BY_POPULARITY.popular,
+  },
+  action: recommendedFilmInfoType
+) => {
+  const { type, genre, rating, popularity } = action;
 
   switch (type) {
     case SET_RECOMMENDED_FILM_GENRE:

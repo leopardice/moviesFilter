@@ -1,24 +1,25 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { Grid } from '@mui/material';
-import { IMovieCard, IStore } from '../../../../redux/rootDir/interfaces';
-import MovieCard from './MovieCard/MovieCard';
-import {
-  getFilteredList,
-} from './filterList';
-import MOVIES_DATA from '../../../../shared/api/moviesData';
-import { useAppSelector } from '../../../../shared/hooks';
+import React from "react";
+import { useSelector } from "react-redux";
+import { Grid } from "@mui/material";
+import { IMovieCard, IStore } from "../../../../redux/rootDir/interfaces";
+import MovieCard from "./MovieCard/MovieCard";
+import { getFilteredList } from "./filterList";
+import MOVIES_DATA, { getFilmsData } from "../../../../shared/api/api";
+import { useAppSelector } from "../../../../shared/hooks";
 
 const MoviesList = () => {
   const currentPage = useAppSelector((state) => state.currentPage.value);
 
-  const showCurrentPageCards = (moviesData: IMovieCard[], page: number) : IMovieCard[] => {
-    const endPosition = (page * 10) + 1;
+  const showCurrentPageCards = (
+    moviesData: IMovieCard[],
+    page: number
+  ): IMovieCard[] => {
+    const endPosition = page * 10 + 1;
     const start = endPosition - 10;
     return moviesData.slice(start, endPosition);
   };
 
-  const cardsToShow = showCurrentPageCards(MOVIES_DATA, currentPage);
+  const cardsToShow = showCurrentPageCards(getFilteredList(), currentPage);
 
   return (
     <Grid item container xs={9} spacing={1}>
@@ -29,7 +30,9 @@ const MoviesList = () => {
           rating={movieInfo.vote_average}
           title={movieInfo.title}
           detailsText={movieInfo.overview}
-          imagePath={`https://image.tmdb.org/t/p/w500/${movieInfo.poster_path || movieInfo.backdrop_path}`}
+          imagePath={`https://image.tmdb.org/t/p/w500/${
+            movieInfo.poster_path || movieInfo.backdrop_path
+          }`}
         />
       ))}
     </Grid>

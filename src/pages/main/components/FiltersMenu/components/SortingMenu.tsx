@@ -1,33 +1,36 @@
-import React from 'react';
+import React from "react";
+import { FormControl, Select, Typography, MenuItem } from "@mui/material";
+import { SelectChangeEvent } from "@mui/material/Select";
 import {
-  FormControl, Select, Typography, MenuItem,
-} from '@mui/material';
-import { SelectChangeEvent } from '@mui/material/Select';
-import { useDispatch, useSelector } from 'react-redux';
-import { SORTING_VALUES } from '../../MoviesList/filterList';
-import { setMovieIndex, setSortingValue } from '../../../../../redux/rootDir/actions';
-import { IStore } from '../../../../../redux/rootDir/interfaces';
+  setSortingValue,
+  SORTING_VALUES,
+} from "../../../../../shared/features/filter-values";
+import { useAppDispatch, useAppSelector } from "../../../../../shared/hooks";
+import { resetPage } from "../../../../../shared/features/current-page";
 
 const SortingMenu = () => {
-  const dispatch = useDispatch();
-  const sortingValue = useSelector((state: IStore) => state.sortingValue);
+  const dispatch = useAppDispatch();
+  const sortingValue = useAppSelector(
+    (state) => state.filterValues.sortingValue
+  );
 
   const handleChange = (event: SelectChangeEvent) => {
     dispatch(setSortingValue(event.target.value));
-    dispatch(setMovieIndex(0));
+    dispatch(resetPage());
   };
 
   return (
     <div>
-      <Typography variant="body2" component="p">Сортировать по:</Typography>
+      <Typography variant="body2" component="p">
+        Сортировать по:
+      </Typography>
       <FormControl fullWidth>
-        <Select
-          onChange={handleChange}
-          value={sortingValue}
-        >
-          <MenuItem value={SORTING_VALUES.highToLow}>{SORTING_VALUES.highToLow}</MenuItem>
-          <MenuItem value={SORTING_VALUES.lowToHigh}>
-            {SORTING_VALUES.lowToHigh}
+        <Select onChange={handleChange} value={sortingValue}>
+          <MenuItem value={SORTING_VALUES.byPopularity.highToLow}>
+            {SORTING_VALUES.byPopularity.highToLow}
+          </MenuItem>
+          <MenuItem value={SORTING_VALUES.byPopularity.lowToHigh}>
+            {SORTING_VALUES.byPopularity.lowToHigh}
           </MenuItem>
         </Select>
       </FormControl>
