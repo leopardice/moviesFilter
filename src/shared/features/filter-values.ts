@@ -37,6 +37,11 @@ const filterValuesSlice = createSlice({
         (genre) => genre !== action.payload
       );
     },
+    resetFilterValues(state) {
+      state.releaseYear = initialState.releaseYear;
+      state.sortingValue = initialState.sortingValue;
+      state.chosenGenres = initialState.chosenGenres;
+    },
   },
 });
 
@@ -45,5 +50,6 @@ export const {
   setSortingValue,
   addChosenGenre,
   removeChosenGenre,
+  resetFilterValues,
 } = filterValuesSlice.actions;
 export default filterValuesSlice.reducer;

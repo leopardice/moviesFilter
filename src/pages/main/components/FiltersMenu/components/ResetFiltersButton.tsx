@@ -6,19 +6,20 @@ import {
   setMovieIndex,
 } from "../../../../../redux/rootDir/actions";
 import {
+  resetFilterValues,
   setReleaseYear,
   setSortingValue,
   SORTING_VALUES,
 } from "../../../../../shared/features/filter-values";
+import { useAppDispatch } from "../../../../../shared/hooks";
+import { resetPage } from "../../../../../shared/features/current-page";
 
 const ResetFiltersButton = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const resetFiltersHandler = () => {
-    dispatch(setSortingValue(SORTING_VALUES.byPopularity.highToLow));
-    dispatch(setReleaseYear(2020));
-    dispatch(setMovieIndex(0));
-    dispatch(clearGenres());
+    dispatch(resetPage());
+    dispatch(resetFilterValues());
   };
 
   return (

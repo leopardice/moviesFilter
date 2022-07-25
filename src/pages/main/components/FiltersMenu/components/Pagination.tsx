@@ -1,11 +1,6 @@
 import React from "react";
 import { Grid, Button, Typography } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
-import { IMovieCard, IStore } from "../../../../../redux/rootDir/interfaces";
-import {
-  setCurrentPage,
-  setMovieIndex,
-} from "../../../../../redux/rootDir/actions";
+import { IMovieCard } from "../../../../../redux/rootDir/interfaces";
 import { getFilteredList } from "../../MoviesList/filterList";
 import { useAppDispatch, useAppSelector } from "../../../../../shared/hooks";
 import {
