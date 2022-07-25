@@ -1,10 +1,10 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
-interface authState {
+interface IAuthState {
   loggedIn: boolean;
 }
 
-const initialState: authState = { loggedIn: true };
+const initialState: IAuthState = { loggedIn: true };
 
 const authorizationSlice = createSlice({
   name: "authorization",

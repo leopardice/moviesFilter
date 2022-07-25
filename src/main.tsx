@@ -8,7 +8,7 @@ import App from "./App";
 import DetailsPage from "./pages/details/details-page";
 import MainPage from "./pages/main/main-page";
 import SearchPage from "./pages/search/search-page";
-import { store, persistor } from "./shared/store";
+import { persistor, store } from "./shared/store";
 
 let theme = createTheme({
   typography: {},

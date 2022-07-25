@@ -2,8 +2,7 @@ import React, { useEffect } from "react";
 import { StarBorder } from "@mui/icons-material";
 import StarIcon from "@mui/icons-material/Star";
 import { Button } from "@mui/material";
-import { IFavoriteButton } from "../MovieCard";
-import { isIdInList, LOCAL_STORAGE_KEYS } from "../../../../../../shared/utils";
+import { isIdInList } from "../../../../../../shared/utils";
 import useLoginModalStatus, {
   useAppDispatch,
   useAppSelector,
@@ -11,14 +10,18 @@ import useLoginModalStatus, {
 } from "../../../../../../shared/hooks";
 import {
   addFavoriteFilm,
-  addWatchLaterFilm,
   FILM_LIST_TYPES,
   removeFavoriteFilm,
-  removeWatchLaterFilm,
 } from "../../../../../../shared/features/film-list-type";
 
+interface IFavoriteButton {
+  id: number;
+}
+
 const AddFavoriteButton = ({ id }: IFavoriteButton) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isModalOpen, setLoginModalStatus] = useLoginModalStatus();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isAuthenticated, setAuthenticationStatus] = useAuthenticationStatus();
 
   const dispatch = useAppDispatch();

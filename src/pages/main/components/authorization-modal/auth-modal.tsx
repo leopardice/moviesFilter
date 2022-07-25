@@ -1,10 +1,15 @@
-import React, {
-  useState, FormEvent,
-} from 'react';
+import React, { FormEvent, useState } from "react";
 import {
-  Dialog, DialogTitle, DialogContent, TextField, DialogActions, Button, FormControl,
-} from '@mui/material';
-import useLoginModalStatus, { useAuthenticationStatus } from '../../../../shared/hooks';
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  TextField,
+} from "@mui/material";
+import useLoginModalStatus, {
+  useAuthenticationStatus,
+} from "../../../../shared/hooks";
 
 export interface IUserInfo {
   login: string;
@@ -13,29 +18,38 @@ export interface IUserInfo {
 
 const AuthorizationModal = () => {
   const [isModalOpen, setLoginModalStatus] = useLoginModalStatus();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isAuthenticated, setAuthenticationStatus] = useAuthenticationStatus();
 
   const handleClose = () => {
     setLoginModalStatus(false);
   };
 
-  const [login, setLogin] = useState('');
-  const [password, setPassword] = useState('');
-  const userInfo: IUserInfo = { login: 'a', password: '1' };
+  const [login, setLogin] = useState("");
+  const [password, setPassword] = useState("");
+  const userInfo: IUserInfo = {
+    login: "a",
+    password: "1",
+  };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const isUserApproved = (login === userInfo.login) && (password === userInfo.password);
+    const isUserApproved =
+      login === userInfo.login && password === userInfo.password;
     if (isUserApproved) {
       setAuthenticationStatus(true);
     }
   };
 
-  const handleLoginChange = (e: { target: { value: React.SetStateAction<string> }}) => {
+  const handleLoginChange = (e: {
+    target: { value: React.SetStateAction<string> };
+  }) => {
     setLogin(e.target.value);
   };
 
-  const handlePasswordChange = (e: { target: { value: React.SetStateAction<string> }}) => {
+  const handlePasswordChange = (e: {
+    target: { value: React.SetStateAction<string> };
+  }) => {
     setPassword(e.target.value);
   };
 
@@ -68,7 +82,9 @@ const AuthorizationModal = () => {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button type="submit" onClick={handleClose}>Log In</Button>
+          <Button type="submit" onClick={handleClose}>
+            Log In
+          </Button>
         </DialogActions>
       </form>
     </Dialog>

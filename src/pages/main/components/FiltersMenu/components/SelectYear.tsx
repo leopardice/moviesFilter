@@ -1,8 +1,6 @@
 import React from "react";
 import { FormControl, MenuItem, Select, Typography } from "@mui/material";
 import { SelectChangeEvent } from "@mui/material/Select";
-import { useDispatch, useSelector } from "react-redux";
-import { IStore } from "../../../../../redux/rootDir/interfaces";
 import { resetPage } from "../../../../../shared/features/current-page";
 import { useAppDispatch, useAppSelector } from "../../../../../shared/hooks";
 import { setReleaseYear } from "../../../../../shared/features/filter-values";

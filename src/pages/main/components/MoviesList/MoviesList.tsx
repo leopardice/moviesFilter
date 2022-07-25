@@ -1,23 +1,21 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import { Grid } from "@mui/material";
-import { IMovieCard, IStore } from "../../../../redux/rootDir/interfaces";
 import MovieCard from "./MovieCard/MovieCard";
-import { getFilteredList } from "./filterList";
-import MOVIES_DATA, { getFilmsData } from "../../../../shared/api/api";
+import getFilteredList from "./filterList";
 import { useAppSelector } from "../../../../shared/hooks";
+import { IMovieCard } from "../../../../shared/api/api";
+
+const showCurrentPageCards = (
+  moviesData: IMovieCard[],
+  page: number
+): IMovieCard[] => {
+  const endPosition = page * 10 + 1;
+  const start = endPosition - 10;
+  return moviesData.slice(start, endPosition);
+};
 
 const MoviesList = () => {
   const currentPage = useAppSelector((state) => state.currentPage.value);
-
-  const showCurrentPageCards = (
-    moviesData: IMovieCard[],
-    page: number
-  ): IMovieCard[] => {
-    const endPosition = page * 10 + 1;
-    const start = endPosition - 10;
-    return moviesData.slice(start, endPosition);
-  };
 
   const cardsToShow = showCurrentPageCards(getFilteredList(), currentPage);
 

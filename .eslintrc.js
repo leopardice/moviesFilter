@@ -3,9 +3,10 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  extends: ["plugin:react/recommended", "airbnb", "prettier"],
+  extends: ["airbnb", "airbnb-typescript", "prettier"],
   parser: "@typescript-eslint/parser",
   parserOptions: {
+    project: ["./tsconfig.json", "./tsconfig.eslint.json"],
     ecmaFeatures: {
       jsx: true,
     },
@@ -25,5 +26,6 @@ module.exports = {
       },
     ],
     quotes: ["error", "double"],
+    "no-param-reassign": ["error", { props: false }],
   },
 };

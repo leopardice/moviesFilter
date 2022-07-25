@@ -1,6 +1,5 @@
 import React from "react";
 import { Grid, Paper, Stack, Typography } from "@mui/material";
-import { useSelector } from "react-redux";
 import SortingMenu from "./components/SortingMenu";
 import SelectYear from "./components/SelectYear";
 import GenreCheckboxes from "./components/GenreCheckboxes";
@@ -10,6 +9,7 @@ import ListTypeSelect from "./components/list-type-select";
 import { useAuthenticationStatus } from "../../../../shared/hooks";
 
 const FiltersMenu = () => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isAuthenticated, setAuthenticationStatus] = useAuthenticationStatus();
 
   return (

@@ -1,16 +1,6 @@
 import React from "react";
 import Button from "@mui/material/Button";
-import { useDispatch } from "react-redux";
-import {
-  clearGenres,
-  setMovieIndex,
-} from "../../../../../redux/rootDir/actions";
-import {
-  resetFilterValues,
-  setReleaseYear,
-  setSortingValue,
-  SORTING_VALUES,
-} from "../../../../../shared/features/filter-values";
+import { resetFilterValues } from "../../../../../shared/features/filter-values";
 import { useAppDispatch } from "../../../../../shared/hooks";
 import { resetPage } from "../../../../../shared/features/current-page";
 

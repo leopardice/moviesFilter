@@ -1,14 +1,11 @@
-import { useSelector } from "react-redux";
-import { IMovieCard, IStore } from "../../../../redux/rootDir/interfaces";
-import { bookmarkTypes } from "../FiltersMenu/components/list-type-select";
 import { SORTING_VALUES } from "../../../../shared/features/filter-values";
-import { getFilmsData } from "../../../../shared/api/api";
+import { getFilmsData, IMovieCard } from "../../../../shared/api/api";
 import { useAppSelector } from "../../../../shared/hooks";
 import { FILM_LIST_TYPES } from "../../../../shared/features/film-list-type";
 
 const getFilmById = (savedId: number) => {
   const filmCard = getFilmsData().find((item) => item.id === savedId);
-  if (filmCard === undefined) console.log("There is no such film");
+  if (filmCard === undefined) return "";
   return filmCard as IMovieCard;
 };
 
@@ -62,12 +59,13 @@ const filterByGenres = (
     (item) => !stateGenres.length || isGenreInState(item.genre_ids, stateGenres)
   );
 
-export const getFilteredList = (): IMovieCard[] => {
+const getFilteredList = (): IMovieCard[] => {
   const { releaseYear, sortingValue, chosenGenres } = useAppSelector(
     (state) => state.filterValues
   );
   const filteredByYear = filterByYear(releaseYear);
   const sortedList = sortMoviesList(filteredByYear, sortingValue);
-  const filteredByGenres = filterByGenres(sortedList, chosenGenres);
-  return filteredByGenres;
+  return filterByGenres(sortedList, chosenGenres);
 };
+
+export default getFilteredList;

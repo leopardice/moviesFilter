@@ -1,10 +1,6 @@
 import { Box, MenuItem, Select, Typography } from "@mui/material";
 import React from "react";
 import { SelectChangeEvent } from "@mui/material/Select";
-import {
-  FILMS_BY_RATING,
-  IRatingFilterProp,
-} from "../rating-filter/rating-filter";
 
 export interface IPopularityFilterProp {
   popularity: string;

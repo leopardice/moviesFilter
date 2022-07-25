@@ -1,17 +1,15 @@
 import React from "react";
-import { Grid, Button, Typography } from "@mui/material";
-import { IMovieCard } from "../../../../../redux/rootDir/interfaces";
-import { getFilteredList } from "../../MoviesList/filterList";
+import { Button, Grid, Typography } from "@mui/material";
+import getFilteredList from "../../MoviesList/filterList";
 import { useAppDispatch, useAppSelector } from "../../../../../shared/hooks";
 import {
   nextPage,
   previousPage,
 } from "../../../../../shared/features/current-page";
+import { IMovieCard } from "../../../../../shared/api/api";
 
-const getNumberOfPages = (array: IMovieCard[]): number => {
-  const numberOfPages = Math.ceil(array.length / 10);
-  return numberOfPages;
-};
+const getNumberOfPages = (array: IMovieCard[]): number =>
+  Math.ceil(array.length / 10);
 
 const Pagination = () => {
   const currentPage = useAppSelector((state) => state.currentPage.value);

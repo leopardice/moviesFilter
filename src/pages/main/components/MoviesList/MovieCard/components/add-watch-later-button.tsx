@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { BookmarkBorderOutlined } from "@mui/icons-material";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import { Button } from "@mui/material";
-import { IFavoriteButton } from "../MovieCard";
-import { isIdInList, LOCAL_STORAGE_KEYS } from "../../../../../../shared/utils";
+import { isIdInList } from "../../../../../../shared/utils";
 import useLoginModalStatus, {
   useAppDispatch,
   useAppSelector,
@@ -11,12 +10,17 @@ import useLoginModalStatus, {
 } from "../../../../../../shared/hooks";
 import {
   addWatchLaterFilm,
-  FILM_LIST_TYPES,
   removeWatchLaterFilm,
 } from "../../../../../../shared/features/film-list-type";
 
-const AddWatchLaterButton = ({ id }: IFavoriteButton) => {
+interface IButtonProps {
+  id: number;
+}
+
+const AddWatchLaterButton = ({ id }: IButtonProps) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isModalOpen, setLoginModalStatus] = useLoginModalStatus();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isAuthenticated, setAuthenticationStatus] = useAuthenticationStatus();
 
   const dispatch = useAppDispatch();

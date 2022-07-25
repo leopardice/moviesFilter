@@ -1,14 +1,6 @@
 import React, { SyntheticEvent } from "react";
 import { FormControlLabel, FormGroup } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  addGenre,
-  removeGenre,
-  setMovieIndex,
-} from "../../../../../redux/rootDir/actions";
-import { GENRES } from "./genresData";
-import { IStore } from "../../../../../redux/rootDir/interfaces";
 import { useAppDispatch, useAppSelector } from "../../../../../shared/hooks";
 import {
   addChosenGenre,

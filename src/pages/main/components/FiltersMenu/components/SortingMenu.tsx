@@ -1,5 +1,5 @@
 import React from "react";
-import { FormControl, Select, Typography, MenuItem } from "@mui/material";
+import { FormControl, MenuItem, Select, Typography } from "@mui/material";
 import { SelectChangeEvent } from "@mui/material/Select";
 import {
   setSortingValue,

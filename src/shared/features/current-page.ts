@@ -1,20 +1,20 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
-interface currentPageState {
+interface ICurrentPageState {
   value: number;
 }
 
-const initialState: currentPageState = { value: 1 };
+const initialState: ICurrentPageState = { value: 1 };
 
 const currentPageSlice = createSlice({
   name: "currentPage",
   initialState,
   reducers: {
     nextPage(state) {
-      state.value++;
+      state.value = +1;
     },
     previousPage(state) {
-      state.value--;
+      state.value = -1;
     },
     resetPage(state) {
       state.value = 1;

@@ -1,5 +1,5 @@
-import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
-import { RootState, AppDispatch } from "./store";
+import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "./store";
 import { closeLogin, openLogin } from "./features/login-modal";
 import { logIn, logOut } from "./features/authorization";
 

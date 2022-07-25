@@ -1,14 +1,11 @@
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 import { Box, Container } from "@mui/material";
 import { SelectChangeEvent } from "@mui/material/Select";
 import { getFilmsData } from "../../shared/api/api";
 import GenresFilter from "./components/genres-filter/genres-filter";
 import RatingFilter from "./components/rating-filter/rating-filter";
 import getRecommendedFilms from "./components/utils";
-import ratingFilter from "./components/rating-filter/rating-filter";
-import PopularityFilter, {
-  FILMS_BY_POPULARITY,
-} from "./components/popularity-filter/popularity-filter";
+import PopularityFilter from "./components/popularity-filter/popularity-filter";
 import RecommendedFilms from "./components/recommended-films/recommended-films";
 import Controls from "./components/controls/controls";
 

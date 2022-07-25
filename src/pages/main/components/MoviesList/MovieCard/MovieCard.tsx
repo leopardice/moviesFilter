@@ -1,69 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { Grid, Paper, Button, Typography, Box } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { Box, Button, Grid, Paper, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import AddFavoriteButton from "./components/add-favorite-button";
 import AddWatchLaterButton from "./components/add-watch-later-button";
-import useLoginModalStatus, {
-  useAppDispatch,
-  useAppSelector,
-  useAuthenticationStatus,
-} from "../../../../../shared/hooks";
-import { IStore } from "../../../../../redux/rootDir/interfaces";
-import {
-  addFilmFavorite,
-  addFilmWatchLater,
-  removeFilmFavorite,
-  removeFilmWatchLater,
-  setFilmFavorite,
-  setWatchLaterFilms,
-} from "../../../../../redux/rootDir/actions";
-import { isIdInList, LOCAL_STORAGE_KEYS } from "../../../../../shared/utils";
-import DetailsPage from "../../../../details/details-page";
-import {
-  addWatchLaterFilm,
-  FILM_LIST_TYPES,
-  removeWatchLaterFilm,
-} from "../../../../../shared/features/film-list-type";
 
 interface MovieCardProps {
   rating: number;
   title: string;
-  detailsText: string;
   imagePath: string;
   id: number;
 }
 
-export interface IFavoriteButton {
-  id: number;
-}
-
 const MovieCard = ({ rating, title, imagePath, id }: MovieCardProps) => (
-  // useEffect(() => {
-  //   const favoriteFilms = localStorage.getItem(
-  //     LOCAL_STORAGE_KEYS.favoriteFilmsKey
-  //   );
-  //   if (!favoriteFilms)
-  //     localStorage.setItem(LOCAL_STORAGE_KEYS.favoriteFilmsKey, "[]");
-  //   dispatch(
-  //     setFilmFavorite(
-  //       JSON.parse(
-  //         localStorage.getItem(LOCAL_STORAGE_KEYS.favoriteFilmsKey) || ""
-  //       )
-  //     )
-  //   );
-  //   const watchLaterFilms = localStorage.getItem(
-  //     LOCAL_STORAGE_KEYS.watchLaterKey
-  //   );
-  //   if (!watchLaterFilms)
-  //     localStorage.setItem(LOCAL_STORAGE_KEYS.watchLaterKey, "[]");
-  //   dispatch(
-  //     setWatchLaterFilms(
-  //       JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEYS.watchLaterKey) || "")
-  //     )
-  //   );
-  // }, []);
-
   <Grid item xs={6}>
     <Paper elevation={3}>
       <Grid container className="main-card">

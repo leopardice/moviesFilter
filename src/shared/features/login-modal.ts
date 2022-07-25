@@ -1,10 +1,10 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
-interface loginModalState {
+interface ILoginModalState {
   open: boolean;
 }
 
-const initialState: loginModalState = { open: false };
+const initialState: ILoginModalState = { open: false };
 
 const loginModalSlice = createSlice({
   name: "loginModal",
