@@ -2,7 +2,7 @@ import React from "react";
 import { BookmarkBorderOutlined } from "@mui/icons-material";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import { Button } from "@mui/material";
-import { isIdInList } from "../../../../../../shared/utils";
+import isIdInList from "./utils";
 import useLoginModalStatus, {
   useAppDispatch,
   useAppSelector,

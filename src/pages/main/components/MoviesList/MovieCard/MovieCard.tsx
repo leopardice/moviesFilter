@@ -12,16 +12,16 @@ interface MovieCardProps {
 }
 
 const MovieCard = ({ rating, title, imagePath, id }: MovieCardProps) => (
-  <Grid item xs={6}>
+  <Grid item xs={12} sm={6}>
     <Paper elevation={3}>
       <Grid container className="main-card">
-        <Grid item xs={6}>
+        <Grid item width="50%">
           <img src={imagePath} alt="movie-poster" className="img" />
         </Grid>
         <Grid
           container
           item
-          xs={6}
+          width="50%"
           direction="column"
           justifyContent="space-between"
           alignItems="flex-start"

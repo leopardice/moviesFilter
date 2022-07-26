@@ -4,6 +4,7 @@ import MovieCard from "./MovieCard/MovieCard";
 import getFilteredList from "./filterList";
 import { useAppSelector } from "../../../../shared/hooks";
 import { IMovieCard } from "../../../../shared/api/api";
+import { imgHost } from "../../../details/details-page";
 
 const showCurrentPageCards = (
   moviesData: IMovieCard[],
@@ -20,15 +21,14 @@ const MoviesList = () => {
   const cardsToShow = showCurrentPageCards(getFilteredList(), currentPage);
 
   return (
-    <Grid item container xs={9} spacing={1}>
+    <Grid item container spacing={1} xs sm>
       {cardsToShow.map((movieInfo) => (
         <MovieCard
           key={movieInfo.id}
           id={movieInfo.id}
           rating={movieInfo.vote_average}
           title={movieInfo.title}
-          detailsText={movieInfo.overview}
-          imagePath={`https://image.tmdb.org/t/p/w500/${
+          imagePath={`${imgHost}${
             movieInfo.poster_path || movieInfo.backdrop_path
           }`}
         />

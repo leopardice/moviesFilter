@@ -11,7 +11,15 @@ import SearchPage from "./pages/search/search-page";
 import { persistor, store } from "./shared/store";
 
 let theme = createTheme({
-  typography: {},
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 750,
+      md: 900,
+      lg: 1200,
+      xl: 1536,
+    },
+  },
 });
 theme = responsiveFontSizes(theme);
 

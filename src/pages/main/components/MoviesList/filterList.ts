@@ -5,7 +5,7 @@ import { FILM_LIST_TYPES } from "../../../../shared/features/film-list-type";
 
 const getFilmById = (savedId: number) => {
   const filmCard = getFilmsData().find((item) => item.id === savedId);
-  if (filmCard === undefined) return "";
+  if (filmCard === undefined) alert("No such film");
   return filmCard as IMovieCard;
 };
 

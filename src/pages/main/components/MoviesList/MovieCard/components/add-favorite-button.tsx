@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { StarBorder } from "@mui/icons-material";
 import StarIcon from "@mui/icons-material/Star";
 import { Button } from "@mui/material";
-import { isIdInList } from "../../../../../../shared/utils";
+import isIdInList from "./utils";
 import useLoginModalStatus, {
   useAppDispatch,
   useAppSelector,

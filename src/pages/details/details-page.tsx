@@ -1,11 +1,12 @@
 import React from "react";
 import { Box, Container, Divider, Stack, Typography } from "@mui/material";
 import { useParams } from "react-router-dom";
-import { getFilteredList } from "../main/components/MoviesList/filterList";
+import getFilteredList from "../main/components/MoviesList/filterList";
 import { IMovieCard } from "../../shared/api/api";
 
+export const imgHost = "https://image.tmdb.org/t/p/w500/";
+
 const DetailsPage = () => {
-  const imgHost = "https://image.tmdb.org/t/p/w500/";
   const params = useParams();
   const { filmId } = params;
   const cardData: IMovieCard | undefined = getFilteredList().find(
@@ -18,6 +19,7 @@ const DetailsPage = () => {
       sx={{
         display: "flex",
         flexDirection: "column",
+        height: "100vh",
       }}
     >
       <Box
@@ -30,7 +32,7 @@ const DetailsPage = () => {
           backgroundPosition: "50% 0",
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
-          height: "50vh",
+          height: "50%",
           gap: "2rem",
           padding: "0 5rem",
         }}

@@ -1,6 +1,6 @@
 import { Box, Stack, Typography } from "@mui/material";
 import React from "react";
-import { imgHost } from "../../../../shared/utils";
+import { imgHost } from "../../../details/details-page";
 
 interface IRecommendedFilmsProp {
   poster: string;

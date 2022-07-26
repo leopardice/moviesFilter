@@ -13,7 +13,7 @@ const FiltersMenu = () => {
   const [isAuthenticated, setAuthenticationStatus] = useAuthenticationStatus();
 
   return (
-    <Grid item xs={3}>
+    <Grid item xs={12} sm={3}>
       <Paper elevation={3} sx={{ padding: 1 }}>
         <Stack spacing={2}>
           {isAuthenticated ? <ListTypeSelect /> : ""}

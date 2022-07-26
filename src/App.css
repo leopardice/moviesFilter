@@ -8,6 +8,7 @@
 
 .pages-link {
     text-decoration: none;
+    color: black;
 }
 
 .pages-link:hover {
@@ -20,7 +21,6 @@
 
 .pages-link:visited {
     text-decoration: none;
-    color: black;
 }
 
 .pages-link:focus {
