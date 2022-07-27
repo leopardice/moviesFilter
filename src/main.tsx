@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { HashRouter, Route, Routes } from "react-router-dom";
 import { createTheme, responsiveFontSizes, ThemeProvider } from "@mui/material";
 import { PersistGate } from "redux-persist/integration/react";
 import App from "./App";
@@ -24,7 +24,7 @@ let theme = createTheme({
 theme = responsiveFontSizes(theme);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <BrowserRouter>
+  <HashRouter>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <ThemeProvider theme={theme}>
@@ -38,5 +38,5 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         </ThemeProvider>
       </PersistGate>
     </Provider>
-  </BrowserRouter>
+  </HashRouter>
 );
