@@ -89,8 +89,8 @@ const SearchPage = () => {
           <RecommendedFilms
             poster={poster}
             title={title}
-            rating={filmRating}
-            background={background}
+            rating={filmRating.toString()}
+            background={background || ""}
           />
           <Controls
             onDislikeClick={dislikeButtonHandler}

@@ -1,5 +1,5 @@
-import { IMovieCard } from "../../../../redux/rootDir/interfaces";
 import { FILMS_BY_POPULARITY } from "./popularity-filter";
+import { IMovieCard } from "../../../../shared/api/api";
 
 const getFilmsByPopularity = (
   filmList: IMovieCard[],
