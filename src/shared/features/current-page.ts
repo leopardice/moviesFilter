@@ -11,10 +11,10 @@ const currentPageSlice = createSlice({
   initialState,
   reducers: {
     nextPage(state) {
-      state.value = +1;
+      state.value += 1;
     },
     previousPage(state) {
-      state.value = -1;
+      state.value -= 1;
     },
     resetPage(state) {
       state.value = 1;
