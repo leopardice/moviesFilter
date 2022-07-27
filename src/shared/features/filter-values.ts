@@ -2,18 +2,18 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export const SORTING_VALUES = {
   byPopularity: {
-    highToLow: "Популярные по убыванию",
-    lowToHigh: "Популярные по возрастанию",
+    highToLow: "Start with more popular",
+    lowToHigh: "Start with less popular",
   },
 };
 
-interface filterValuesState {
+interface IFilterValuesState {
   releaseYear: number;
   sortingValue: string;
   chosenGenres: number[];
 }
 
-const initialState: filterValuesState = {
+const initialState: IFilterValuesState = {
   releaseYear: 2020,
   sortingValue: SORTING_VALUES.byPopularity.highToLow,
   chosenGenres: [],

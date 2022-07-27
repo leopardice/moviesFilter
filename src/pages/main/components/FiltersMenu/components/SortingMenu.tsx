@@ -22,7 +22,7 @@ const SortingMenu = () => {
   return (
     <div>
       <Typography variant="body2" component="p">
-        Сортировать по:
+        Sort by:
       </Typography>
       <FormControl fullWidth>
         <Select onChange={handleChange} value={sortingValue}>

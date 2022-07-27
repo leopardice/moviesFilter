@@ -18,7 +18,7 @@ const FiltersMenu = () => {
         <Stack spacing={2}>
           {isAuthenticated ? <ListTypeSelect /> : ""}
           <Typography variant="h4" component="h4">
-            Фильтры:
+            Filters:
           </Typography>
           <ResetFiltersButton />
           <SortingMenu />

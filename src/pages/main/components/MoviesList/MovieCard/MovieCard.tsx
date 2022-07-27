@@ -35,7 +35,7 @@ const MovieCard = ({ rating, title, imagePath, id }: MovieCardProps) => (
             }}
           >
             <Typography variant="body2" component="p">
-              Рейтинг фильма:
+              Rating:
               {rating}
             </Typography>
             <AddFavoriteButton id={id} />
@@ -55,7 +55,7 @@ const MovieCard = ({ rating, title, imagePath, id }: MovieCardProps) => (
           >
             <Button className="details-button" sx={{ color: "black" }}>
               <Link className="pages-link" to={`/details/${id}`}>
-                Подробнее
+                Details
               </Link>
             </Button>
           </Grid>

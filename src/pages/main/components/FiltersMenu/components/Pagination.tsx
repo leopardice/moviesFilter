@@ -36,7 +36,7 @@ const Pagination = () => {
           disabled={backwardsButtonDisabled}
           onClick={backwardsButtonHandler}
         >
-          Назад
+          Backwards
         </Button>
       </Grid>
       <Grid item xs={6}>
@@ -45,14 +45,14 @@ const Pagination = () => {
           disabled={forwardButtonDisabled}
           onClick={forwardButtonHandler}
         >
-          Вперед
+          Forward
         </Button>
       </Grid>
       <Grid item xs={12}>
         {numberOfPages ? (
           <Typography variant="body1" component="p">
             {currentPage}
-            {" из "}
+            {" of "}
             {numberOfPages}
           </Typography>
         ) : (

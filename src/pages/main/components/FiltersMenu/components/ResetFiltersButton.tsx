@@ -20,7 +20,7 @@ const ResetFiltersButton = () => {
       sx={{ backgroundColor: "black" }}
       onClick={resetFiltersHandler}
     >
-      Сбросить все фильтры
+      Reset All Filters
     </Button>
   );
 };

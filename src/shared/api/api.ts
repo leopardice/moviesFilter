@@ -4074,79 +4074,79 @@ export const getGenresData = (): GenreItem[] => {
   const GENRES = [
     {
       id: 28,
-      name: "боевик",
+      name: "Action",
     },
     {
       id: 12,
-      name: "приключения",
+      name: "Adventure",
     },
     {
       id: 16,
-      name: "мультфильм",
+      name: "Cartoon",
     },
     {
       id: 35,
-      name: "комедия",
+      name: "Comedy",
     },
     {
       id: 80,
-      name: "криминал",
+      name: "Criminal drama",
     },
     {
       id: 99,
-      name: "документальный",
+      name: "Documentary",
     },
     {
       id: 18,
-      name: "драма",
+      name: "Drama",
     },
     {
       id: 10751,
-      name: "семейный",
+      name: "Family",
     },
     {
       id: 14,
-      name: "фэнтези",
+      name: "Fantasy",
     },
     {
       id: 36,
-      name: "история",
+      name: "History",
     },
     {
       id: 27,
-      name: "ужасы",
+      name: "Horror",
     },
     {
       id: 10402,
-      name: "музыка",
+      name: "Musical",
     },
     {
       id: 9648,
-      name: "детектив",
+      name: "Detective",
     },
     {
       id: 10749,
-      name: "мелодрама",
+      name: "Romantic",
     },
     {
       id: 878,
-      name: "фантастика",
+      name: "Sci-Fi",
     },
     {
       id: 10770,
-      name: "телевизионный фильм",
+      name: "TV show",
     },
     {
       id: 53,
-      name: "триллер",
+      name: "Thriller",
     },
     {
       id: 10752,
-      name: "военный",
+      name: "Military",
     },
     {
       id: 37,
-      name: "вестерн",
+      name: "Western",
     },
   ];
   return GENRES;

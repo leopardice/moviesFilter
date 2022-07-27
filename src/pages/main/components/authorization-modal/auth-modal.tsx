@@ -25,8 +25,8 @@ const AuthorizationModal = () => {
     setLoginModalStatus(false);
   };
 
-  const [login, setLogin] = useState("");
-  const [password, setPassword] = useState("");
+  const [login, setLogin] = useState("a");
+  const [password, setPassword] = useState("1");
   const userInfo: IUserInfo = {
     login: "a",
     password: "1",
