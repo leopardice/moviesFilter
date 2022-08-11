@@ -22,17 +22,17 @@ const MoviesList = () => {
 
   return (
     <Grid item container spacing={1} xs sm>
-      {cardsToShow.map((movieInfo) => (
-        <MovieCard
-          key={movieInfo.id}
-          id={movieInfo.id}
-          rating={movieInfo.vote_average}
-          title={movieInfo.title}
-          imagePath={`${imgHost}${
-            movieInfo.poster_path || movieInfo.backdrop_path
-          }`}
-        />
-      ))}
+      {cardsToShow.map(
+        ({ id, vote_average, title, poster_path, backdrop_path }) => (
+          <MovieCard
+            key={id}
+            id={id}
+            rating={vote_average}
+            title={title}
+            imagePath={`${imgHost}${poster_path || backdrop_path}`}
+          />
+        )
+      )}
     </Grid>
   );
 };

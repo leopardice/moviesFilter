@@ -23,7 +23,7 @@ const ListTypeSelect = () => {
   return (
     <div>
       <Typography variant="body2" component="p">
-        Release Year
+        Film List
       </Typography>
       <FormControl fullWidth>
         <Select onChange={handleChange} value={listType}>
