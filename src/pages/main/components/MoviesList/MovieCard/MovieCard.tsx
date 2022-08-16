@@ -12,7 +12,7 @@ interface MovieCardProps {
 }
 
 const MovieCard = ({ rating, title, imagePath, id }: MovieCardProps) => (
-  <Grid item xs={12} sm={6}>
+  <Box display="block">
     <Paper elevation={3}>
       <Grid container className="main-card">
         <Grid item width="50%">
@@ -28,20 +28,20 @@ const MovieCard = ({ rating, title, imagePath, id }: MovieCardProps) => (
           sx={{ padding: 1 }}
         >
           <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-            }}
+            display="flex"
+            width="100%"
+            justifyContent="space-between"
+            alignItems="center"
           >
-            <Typography variant="body2" component="p">
-              Rating:
-              {rating}
+            <Typography variant="body1" component="p" fontSize="18px">
+              {`Rating: ${rating}`}
             </Typography>
-            <AddFavoriteButton id={id} />
-            <AddWatchLaterButton id={id} />
+            <div>
+              <AddFavoriteButton id={id} />
+              <AddWatchLaterButton id={id} />
+            </div>
           </Box>
-          <Grid item>
+          <Grid item width="100%" textAlign="center">
             <Typography variant="h6" component="h6">
               {title}
             </Typography>
@@ -53,7 +53,10 @@ const MovieCard = ({ rating, title, imagePath, id }: MovieCardProps) => (
               width: "100%",
             }}
           >
-            <Button className="details-button" sx={{ color: "black" }}>
+            <Button
+              className="details-button"
+              sx={{ color: "black", width: "100%", textAlign: "center" }}
+            >
               <Link className="pages-link" to={`/details/${id}`}>
                 Details
               </Link>
@@ -62,6 +65,6 @@ const MovieCard = ({ rating, title, imagePath, id }: MovieCardProps) => (
         </Grid>
       </Grid>
     </Paper>
-  </Grid>
+  </Box>
 );
 export default MovieCard;

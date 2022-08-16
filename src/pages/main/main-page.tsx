@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Container, Grid, useMediaQuery, useTheme } from "@mui/material";
+import { Box, Container, useMediaQuery, useTheme } from "@mui/material";
 import FiltersMenu from "./components/FiltersMenu/FiltersMenu";
 import MoviesList from "./components/MoviesList/MoviesList";
 import FilterButton from "./components/FiltersMenu/components/show-filters-button";
@@ -7,8 +7,6 @@ import FilterButton from "./components/FiltersMenu/components/show-filters-butto
 const MainPage = () => {
   const theme = useTheme();
   const phone = useMediaQuery(theme.breakpoints.only("xs"));
-
-  const gridDirection = phone ? "column" : "row";
 
   const [filterModal, setFilterModal] = useState(false);
 
@@ -18,14 +16,14 @@ const MainPage = () => {
 
   return (
     <Container>
-      <Grid container spacing={1} direction={gridDirection}>
+      <Box display="flex" gap="10px">
         {!phone && <FiltersMenu />}
         {filterModal && <FiltersMenu />}
         {phone && (
           <FilterButton onClick={filterButtonHandler} isOpen={filterModal} />
         )}
         <MoviesList />
-      </Grid>
+      </Box>
     </Container>
   );
 };

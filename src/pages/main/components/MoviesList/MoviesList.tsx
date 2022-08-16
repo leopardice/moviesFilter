@@ -1,10 +1,10 @@
 import React from "react";
-import { Grid } from "@mui/material";
-import MovieCard from "./MovieCard/MovieCard";
+import { Box } from "@mui/material";
 import getFilteredList from "./filterList";
 import { useAppSelector } from "../../../../shared/hooks";
 import { IMovieCard } from "../../../../shared/api/api";
 import { imgHost } from "../../../details/details-page";
+import MovieCard from "./MovieCard/MovieCard";
 
 const showCurrentPageCards = (
   moviesData: IMovieCard[],
@@ -21,19 +21,21 @@ const MoviesList = () => {
   const cardsToShow = showCurrentPageCards(getFilteredList(), currentPage);
 
   return (
-    <Grid item container spacing={1} xs sm>
-      {cardsToShow.map(
-        ({ id, vote_average, title, poster_path, backdrop_path }) => (
-          <MovieCard
-            key={id}
-            id={id}
-            rating={vote_average}
-            title={title}
-            imagePath={`${imgHost}${poster_path || backdrop_path}`}
-          />
-        )
-      )}
-    </Grid>
+    <Box display="block">
+      <Box display="grid" gridTemplateColumns="1fr 1fr" gap="20px">
+        {cardsToShow.map(
+          ({ id, vote_average, title, poster_path, backdrop_path }) => (
+            <MovieCard
+              key={id}
+              id={id}
+              rating={vote_average}
+              title={title}
+              imagePath={`${imgHost}${poster_path || backdrop_path}`}
+            />
+          )
+        )}
+      </Box>
+    </Box>
   );
 };
 

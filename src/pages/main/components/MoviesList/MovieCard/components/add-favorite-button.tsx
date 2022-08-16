@@ -56,16 +56,14 @@ const AddFavoriteButton = ({ id }: IFavoriteButton) => {
     <Button
       onClick={handleFavoriteClick}
       sx={{
-        padding: 0,
-        minWidth: 12,
         color: "black",
       }}
       aria-label="add to favorites"
     >
       {isFilmInFavorite ? (
-        <StarIcon sx={{ width: 12 }} />
+        <StarIcon sx={{ width: 24 }} />
       ) : (
-        <StarBorder sx={{ width: 12 }} />
+        <StarBorder sx={{ width: 24 }} />
       )}
     </Button>
   );

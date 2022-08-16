@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Grid, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import getFilteredList from "../../MoviesList/filterList";
 import { useAppDispatch, useAppSelector } from "../../../../../shared/hooks";
 import {
@@ -29,26 +29,22 @@ const Pagination = () => {
   };
 
   return (
-    <Grid container spacing={0}>
-      <Grid item xs={6}>
-        <Button
-          variant="contained"
-          disabled={backwardsButtonDisabled}
-          onClick={backwardsButtonHandler}
-        >
-          Backwards
-        </Button>
-      </Grid>
-      <Grid item xs={6}>
-        <Button
-          variant="contained"
-          disabled={forwardButtonDisabled}
-          onClick={forwardButtonHandler}
-        >
-          Forward
-        </Button>
-      </Grid>
-      <Grid item xs={12}>
+    <Box display="grid" gridTemplateColumns="1fr 1fr" gap="12px">
+      <Button
+        variant="contained"
+        disabled={backwardsButtonDisabled}
+        onClick={backwardsButtonHandler}
+      >
+        Previous
+      </Button>
+      <Button
+        variant="contained"
+        disabled={forwardButtonDisabled}
+        onClick={forwardButtonHandler}
+      >
+        Next
+      </Button>
+      <Box gridColumn="1/-1" textAlign="center">
         {numberOfPages ? (
           <Typography variant="body1" component="p">
             {currentPage}
@@ -58,8 +54,8 @@ const Pagination = () => {
         ) : (
           ""
         )}
-      </Grid>
-    </Grid>
+      </Box>
+    </Box>
   );
 };
 export default Pagination;

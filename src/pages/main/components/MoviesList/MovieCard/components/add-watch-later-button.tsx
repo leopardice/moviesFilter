@@ -55,9 +55,9 @@ const AddWatchLaterButton = ({ id }: IButtonProps) => {
       aria-label="add to watch later"
     >
       {isFilmInWatchLater ? (
-        <BookmarkIcon sx={{ width: 12 }} />
+        <BookmarkIcon sx={{ width: 24 }} />
       ) : (
-        <BookmarkBorderOutlined sx={{ width: 12 }} />
+        <BookmarkBorderOutlined sx={{ width: 24 }} />
       )}
     </Button>
   );
