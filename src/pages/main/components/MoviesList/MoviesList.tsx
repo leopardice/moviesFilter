@@ -15,14 +15,20 @@ const showCurrentPageCards = (
   return moviesData.slice(start, endPosition);
 };
 
-const MoviesList = () => {
+interface IMovieList {
+  tabletSmall: boolean;
+}
+
+const MoviesList = ({ tabletSmall }: IMovieList) => {
   const currentPage = useAppSelector((state) => state.currentPage.value);
 
   const cardsToShow = showCurrentPageCards(getFilteredList(), currentPage);
 
+  const columns = tabletSmall ? "1fr" : "1fr 1fr";
+
   return (
     <Box display="block">
-      <Box display="grid" gridTemplateColumns="1fr 1fr" gap="20px">
+      <Box display="grid" gridTemplateColumns={columns} gap="20px">
         {cardsToShow.map(
           ({ id, vote_average, title, poster_path, backdrop_path }) => (
             <MovieCard

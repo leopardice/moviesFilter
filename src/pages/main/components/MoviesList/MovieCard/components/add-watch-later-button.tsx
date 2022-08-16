@@ -15,9 +15,10 @@ import {
 
 interface IButtonProps {
   id: number;
+  isPhone: boolean;
 }
 
-const AddWatchLaterButton = ({ id }: IButtonProps) => {
+const AddWatchLaterButton = ({ id, isPhone }: IButtonProps) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isModalOpen, setLoginModalStatus] = useLoginModalStatus();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -44,6 +45,8 @@ const AddWatchLaterButton = ({ id }: IButtonProps) => {
     }
   };
 
+  const buttonWidth = isPhone ? "12px" : "24px";
+
   return (
     <Button
       onClick={handleWatchLaterClick}
@@ -55,9 +58,9 @@ const AddWatchLaterButton = ({ id }: IButtonProps) => {
       aria-label="add to watch later"
     >
       {isFilmInWatchLater ? (
-        <BookmarkIcon sx={{ width: 24 }} />
+        <BookmarkIcon sx={{ width: buttonWidth }} />
       ) : (
-        <BookmarkBorderOutlined sx={{ width: 24 }} />
+        <BookmarkBorderOutlined sx={{ width: buttonWidth }} />
       )}
     </Button>
   );

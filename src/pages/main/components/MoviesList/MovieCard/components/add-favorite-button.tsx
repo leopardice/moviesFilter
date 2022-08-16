@@ -16,9 +16,10 @@ import {
 
 interface IFavoriteButton {
   id: number;
+  isPhone: boolean;
 }
 
-const AddFavoriteButton = ({ id }: IFavoriteButton) => {
+const AddFavoriteButton = ({ id, isPhone }: IFavoriteButton) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isModalOpen, setLoginModalStatus] = useLoginModalStatus();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -52,18 +53,21 @@ const AddFavoriteButton = ({ id }: IFavoriteButton) => {
     );
   }, [favoriteFilmsIds]);
 
+  const buttonWidth = isPhone ? "12px" : "24px";
+
   return (
     <Button
       onClick={handleFavoriteClick}
       sx={{
         color: "black",
+        minWidth: 12,
       }}
       aria-label="add to favorites"
     >
       {isFilmInFavorite ? (
-        <StarIcon sx={{ width: 24 }} />
+        <StarIcon sx={{ width: buttonWidth }} />
       ) : (
-        <StarBorder sx={{ width: 24 }} />
+        <StarBorder sx={{ width: buttonWidth }} />
       )}
     </Button>
   );

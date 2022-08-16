@@ -32,24 +32,27 @@ const Header = () => {
         <Toolbar
           sx={{
             display: "flex",
-            justifyContent: "space-between",
+            justifyContent: "start",
+            maxWidth: "1200px",
           }}
         >
           <Link className="pages-link" to="/">
-            <Button sx={{ color: "white" }}>Menu</Button>
+            <Button sx={{ color: "white" }}>Home</Button>
           </Link>
           <Link className="pages-link" to="/search">
             <Button sx={{ color: "white" }}>Search</Button>
           </Link>
-          {isAuthenticated ? (
-            <Button onClick={logOutHandler} color="inherit">
-              LogOut
-            </Button>
-          ) : (
-            <Button onClick={handleClickOpen} color="inherit">
-              Login
-            </Button>
-          )}
+          <Box marginLeft="auto">
+            {isAuthenticated ? (
+              <Button onClick={logOutHandler} color="inherit">
+                LogOut
+              </Button>
+            ) : (
+              <Button onClick={handleClickOpen} color="inherit">
+                Login
+              </Button>
+            )}
+          </Box>
         </Toolbar>
       </AppBar>
     </Box>

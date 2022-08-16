@@ -14,9 +14,9 @@ let theme = createTheme({
   breakpoints: {
     values: {
       xs: 0,
-      sm: 750,
-      md: 900,
-      lg: 1200,
+      sm: 400,
+      md: 752,
+      lg: 1000,
       xl: 1536,
     },
   },
@@ -30,7 +30,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <ThemeProvider theme={theme}>
           <Routes>
             <Route path="/" element={<App />}>
-              <Route path="/" element={<MainPage />} />
+              <Route index element={<MainPage />} />
               <Route path="details/:filmId" element={<DetailsPage />} />
               <Route path="/search" element={<SearchPage />} />
             </Route>

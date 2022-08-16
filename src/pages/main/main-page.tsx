@@ -6,7 +6,10 @@ import FilterButton from "./components/FiltersMenu/components/show-filters-butto
 
 const MainPage = () => {
   const theme = useTheme();
-  const phone = useMediaQuery(theme.breakpoints.only("xs"));
+  const tablet = useMediaQuery(theme.breakpoints.down("lg"));
+  const tabletSmall = useMediaQuery(theme.breakpoints.down("md"));
+
+  const flexDirection = tablet ? "column" : "row";
 
   const [filterModal, setFilterModal] = useState(false);
 
@@ -16,13 +19,13 @@ const MainPage = () => {
 
   return (
     <Container>
-      <Box display="flex" gap="10px">
-        {!phone && <FiltersMenu />}
+      <Box display="flex" gap="10px" flexDirection={flexDirection}>
+        {!tablet && <FiltersMenu />}
         {filterModal && <FiltersMenu />}
-        {phone && (
+        {tablet && (
           <FilterButton onClick={filterButtonHandler} isOpen={filterModal} />
         )}
-        <MoviesList />
+        <MoviesList tabletSmall={tabletSmall} />
       </Box>
     </Container>
   );

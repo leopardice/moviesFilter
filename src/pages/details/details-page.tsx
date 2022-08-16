@@ -1,5 +1,13 @@
 import React from "react";
-import { Box, Container, Divider, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Container,
+  Divider,
+  Stack,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import { useParams } from "react-router-dom";
 import getFilteredList from "../main/components/MoviesList/filterList";
 import { IMovieCard } from "../../shared/api/api";
@@ -13,13 +21,16 @@ const DetailsPage = () => {
     (card) => card.id === Number(filmId)
   );
 
+  const theme = useTheme();
+  const tablet = useMediaQuery(theme.breakpoints.down("lg"));
+  const imgPadding = tablet ? "1rem 1rem" : "5rem 5rem";
+
   return (
     <Box
       className="details-page"
       sx={{
         display: "flex",
         flexDirection: "column",
-        height: "100vh",
       }}
     >
       <Box
@@ -28,29 +39,24 @@ const DetailsPage = () => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          backgroundImage: `url(${imgHost}${cardData?.backdrop_path})`,
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${imgHost}${cardData?.backdrop_path})`,
           backgroundPosition: "50% 0",
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
-          height: "50%",
           gap: "2rem",
-          padding: "0 5rem",
+          padding: imgPadding,
         }}
       >
-        <Box
-          sx={{
-            height: "100%",
-            alignItems: "center",
-            display: "flex",
-          }}
-        >
+        {tablet ? (
+          false
+        ) : (
           <img
             src={`${imgHost}${cardData?.poster_path}`}
             alt="movie-poster"
             className="film-poster"
-            height="80%"
+            width="30%"
           />
-        </Box>
+        )}
         <Stack className="film-description" spacing={1}>
           <Typography
             className="film-tittle"
