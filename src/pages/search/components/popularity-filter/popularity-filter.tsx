@@ -1,4 +1,11 @@
-import { Box, MenuItem, Select, Typography } from "@mui/material";
+import {
+  Box,
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  Radio,
+  RadioGroup,
+} from "@mui/material";
 import React from "react";
 import { SelectChangeEvent } from "@mui/material/Select";
 
@@ -18,16 +25,20 @@ const PopularityFilter = ({ popularity, onChange }: IPopularityFilterProp) => {
   const popularityTittle = "Choose film's popularity";
   return (
     <Box>
-      <Typography id="rating-filter" variant="body1" component="p">
-        {popularityTittle}{" "}
-      </Typography>
-      <Select value={popularity} fullWidth onChange={onChange}>
-        {popularityLabels.map((name) => (
-          <MenuItem key={name} value={name}>
-            {name}
-          </MenuItem>
-        ))}
-      </Select>
+      <FormControl>
+        <FormLabel id="rating-filter">{popularityTittle}</FormLabel>
+        <RadioGroup
+          row
+          aria-labelledby="rating-filter"
+          name="rating-filter"
+          value={popularity}
+          onChange={onChange}
+        >
+          {popularityLabels.map((name) => (
+            <FormControlLabel value={name} control={<Radio />} label={name} />
+          ))}
+        </RadioGroup>
+      </FormControl>
     </Box>
   );
 };

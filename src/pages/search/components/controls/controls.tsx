@@ -16,10 +16,10 @@ const Controls = ({ onDislikeClick, idLink }: IControlsProp) => {
       sx={{ padding: "0 5rem" }}
     >
       <Link className="pages-link" to={likeButtonLink}>
-        <Button variant="contained">Like</Button>
+        <Button variant="contained">Details</Button>
       </Link>
       <Button variant="contained" onClick={onDislikeClick}>
-        Dislike
+        Next recommendation
       </Button>
     </Stack>
   );

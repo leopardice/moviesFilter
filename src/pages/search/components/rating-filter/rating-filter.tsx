@@ -1,5 +1,12 @@
 import React from "react";
-import { Box, MenuItem, Select, Typography } from "@mui/material";
+import {
+  Box,
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  Radio,
+  RadioGroup,
+} from "@mui/material";
 import { SelectChangeEvent } from "@mui/material/Select";
 
 export interface IRatingFilterProp {
@@ -14,22 +21,23 @@ export const FILMS_BY_RATING = {
 
 const ratingNames = Object.values(FILMS_BY_RATING);
 
-const RatingFilter = ({ rating, onChange }: IRatingFilterProp) => {
-  const ratingTittle = "Choose film's rating";
-  return (
-    <Box>
-      <Typography id="rating-filter" variant="body1" component="p">
-        {ratingTittle}{" "}
-      </Typography>
-      <Select value={rating} fullWidth onChange={onChange}>
+const RatingFilter = ({ rating, onChange }: IRatingFilterProp) => (
+  <Box>
+    <FormControl>
+      <FormLabel id="rating-filter">Choose film rating</FormLabel>
+      <RadioGroup
+        row
+        aria-labelledby="rating-filter"
+        name="rating-filter"
+        value={rating}
+        onChange={onChange}
+      >
         {ratingNames.map((name) => (
-          <MenuItem key={name} value={name}>
-            {name}
-          </MenuItem>
+          <FormControlLabel value={name} control={<Radio />} label={name} />
         ))}
-      </Select>
-    </Box>
-  );
-};
+      </RadioGroup>
+    </FormControl>
+  </Box>
+);
 
 export default RatingFilter;

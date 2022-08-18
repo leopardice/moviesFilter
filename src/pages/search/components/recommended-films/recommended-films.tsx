@@ -21,7 +21,7 @@ const RecommendedFilms = ({
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
-      backgroundImage: `url(${imgHost}${background})`,
+      backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${imgHost}${background})`,
       backgroundPosition: "50% 0",
       backgroundRepeat: "no-repeat",
       backgroundSize: "cover",
@@ -53,7 +53,7 @@ const RecommendedFilms = ({
         component="h4"
         color="white"
       >
-        Рейтинг:
+        Rating:
         {rating}
       </Typography>
     </Stack>

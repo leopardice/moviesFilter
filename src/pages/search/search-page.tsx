@@ -85,7 +85,7 @@ const SearchPage = () => {
         backdrop_path: background,
       } = filmCard;
       return (
-        <Box>
+        <Box display="flex" flexDirection="column" gap="20px">
           <RecommendedFilms
             poster={poster}
             title={title}
@@ -107,10 +107,12 @@ const SearchPage = () => {
 
   return (
     <Container>
-      <GenresFilter genre={genre} onChange={handleGenreSelectChange} />
-      {getRatingSelect()}
-      {getPopularitySelect()}
-      {getFilmCardTab()}
+      <Box display="flex" flexDirection="column" gap="20px">
+        <GenresFilter genre={genre} onChange={handleGenreSelectChange} />
+        {getRatingSelect()}
+        {getPopularitySelect()}
+        {getFilmCardTab()}
+      </Box>
     </Container>
   );
 };
